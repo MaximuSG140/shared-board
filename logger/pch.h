@@ -1,0 +1,10 @@
+﻿#pragma once
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <unordered_map>
+#include <string>
+#include <map>
+#include <mutex>
+#include <chrono>
+#include <ctime>
+#include <iomanip>
