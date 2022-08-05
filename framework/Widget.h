@@ -19,6 +19,8 @@ public:
 	void setSize(sf::Vector2u size);
 
 	void scale(sf::Vector2f scale_proportions);
+
+	virtual bool containsPoint(sf::Vector2f point_coordinates)const = 0;
 private:
 	const std::string name_;
 	sf::Vector2i position_;
