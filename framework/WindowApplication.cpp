@@ -15,3 +15,21 @@ void WindowApplication::run()
 	}
 	Logger::log(Logger::LogLevel::INFO, "Application exited");
 }
+
+void WindowApplication::setWindowSize(const sf::Vector2u size)
+{
+	main_window_.setSize(size);
+}
+
+sf::Vector2u WindowApplication::windowSize() const
+{
+	return main_window_.getSize();
+}
+
+void WindowApplication::render()
+{
+	for(const auto& widget : widgets_)
+	{
+		main_window_.draw(*widget);
+	}
+}
