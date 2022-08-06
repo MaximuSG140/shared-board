@@ -16,12 +16,12 @@ ClickableWidget::ClickableWidget(const sf::Vector2i position,
 		size)
 {}
 
-void ClickableWidget::startClick(const sf::Vector2f mouse_position)
+void ClickableWidget::startClick(const sf::Vector2i mouse_position)
 {
 	click_started_ = containsPoint(mouse_position);
 }
 
-void ClickableWidget::endClick(const sf::Vector2f mouse_position)
+void ClickableWidget::endClick(const sf::Vector2i mouse_position)
 {
 	if(containsPoint(mouse_position) && click_started_)
 	{

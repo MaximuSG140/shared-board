@@ -22,6 +22,8 @@ protected:
     virtual void handle(const sf::Event& event) = 0;
     void render();
 private:
+    void baseHandle(const sf::Event& event);
+
     sf::RenderWindow main_window_;
     std::vector<std::unique_ptr<Widget>> widgets_;
     std::vector<ClickableWidget*> clickable_widgets_;

@@ -12,8 +12,8 @@ public:
     explicit ClickableWidget(sf::Vector2i position,
         sf::Vector2u size);
 
-    void startClick(sf::Vector2f mouse_position);
-    void endClick(sf::Vector2f mouse_position);
+    void startClick(sf::Vector2i mouse_position);
+    void endClick(sf::Vector2i mouse_position);
 protected:
     virtual void onClick()const = 0;
 private:
