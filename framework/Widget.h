@@ -11,16 +11,14 @@ public:
 	explicit Widget(sf::Vector2i position,
 		sf::Vector2u size);
 
-	std::string name()const;
-	sf::Vector2i position()const;
-	sf::Vector2u size()const;
+	[[nodiscard]] std::string name()const;
+	[[nodiscard]] sf::Vector2i position()const;
+	[[nodiscard]] sf::Vector2u size()const;
 
 	void setPosition(sf::Vector2i position);
 	void setSize(sf::Vector2u size);
 
 	void scale(sf::Vector2f scale_proportions);
-
-	virtual bool containsPoint(sf::Vector2i point_coordinates)const = 0;
 private:
 	const std::string name_;
 	sf::Vector2i position_;

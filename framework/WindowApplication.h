@@ -1,7 +1,7 @@
 #pragma once
 #include "pch.h"
 #include "Application.h"
-#include "ClickableWidget.h"
+#include "IMouseClickable.h"
 #include "Widget.h"
 
 class WindowApplication :
@@ -26,7 +26,7 @@ private:
 
     sf::RenderWindow main_window_;
     std::vector<std::unique_ptr<Widget>> widgets_;
-    std::vector<ClickableWidget*> clickable_widgets_;
+    std::vector<IMouseClickable*> clickable_widgets_;
 };
 
 template <typename... T>
@@ -41,9 +41,9 @@ WidgetType* WindowApplication::addWidget(ConstructorArgs&&... widget_parameters)
         "New widget should be derived from class Widget");
     widgets_.push_back(std::make_unique<WidgetType>(std::forward<ConstructorArgs>(widget_parameters)...));
     auto new_widget = widgets_.back().get();
-    if constexpr (std::is_base_of_v<ClickableWidget, WidgetType>)
+    if constexpr (std::is_base_of_v<IMouseClickable, WidgetType>)
     {
-        clickable_widgets_.push_back(static_cast<ClickableWidget*>(new_widget));
+        clickable_widgets_.push_back(static_cast<IMouseClickable*>(new_widget));
     }
 
     return static_cast<WidgetType*>(new_widget);

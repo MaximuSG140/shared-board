@@ -27,13 +27,25 @@
     <ClInclude Include="Widget.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="ClickableWidget.h">
+    <ClInclude Include="IMouseClickable.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="HoldableWidget.h">
+    <ClInclude Include="IMouseHoldable.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="SimpleButton.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicEdit.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="IMouseSelectable.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="IKeyboardListener.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="IMouseAccessible.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,13 +59,22 @@
     <ClCompile Include="Widget.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="ClickableWidget.cpp">
+    <ClCompile Include="IMouseClickable.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="HoldableWidget.cpp">
+    <ClCompile Include="IMouseHoldable.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="SimpleButton.cpp">
+    <ClCompile Include="BasicEdit.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="IMouseSelectable.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="IKeyboardListener.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="IMouseAccessible.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

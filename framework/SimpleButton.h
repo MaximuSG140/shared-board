@@ -1,10 +1,10 @@
 #pragma once
-#include "ClickableWidget.h"
+#include "IMouseClickable.h"
 #include "logger/log.h"
 
 template<typename FunctorType>
 class SimpleButton :
-    public ClickableWidget
+    public IMouseClickable
 {
 public:
 	explicit SimpleButton(std::string text,
@@ -17,6 +17,7 @@ public:
 	constexpr static sf::Color BODY_COLOR{ 230, 230, 230 };
 	constexpr static sf::Color OUTLINE_COLOR{ 220, 220, 220 };
 	constexpr static sf::Color TEXT_COLOR = sf::Color::Black;
+
 	constexpr static int OUTLINE_THICKNESS = 3;
 protected:
 	void onClick() override;
@@ -34,7 +35,7 @@ SimpleButton<FunctorType>::SimpleButton(std::string text,
                             const sf::Vector2i position,
                             const sf::Vector2u size,
                             FunctorType&& on_click_action)
-	: ClickableWidget("Button " + text,
+	: IMouseClickable("Button " + text,
 	                  position,
 	                  size),
 	text_(std::move(text)),
@@ -50,7 +51,7 @@ bool SimpleButton<FunctorType>::containsPoint(const sf::Vector2i point_coordinat
 	auto bottom_border = button_position.y + button_size.y;
 	auto left_border = button_position.x;
 	auto right_border = button_position.x + button_size.x;
-	return point_coordinates.x >= left_border && point_coordinates.x < right_border&&
+	return point_coordinates.x >= left_border && point_coordinates.x < right_border &&
 		point_coordinates.y >= upper_border && point_coordinates.y < bottom_border;
 }
 
