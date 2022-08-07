@@ -156,13 +156,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="SimpleButton.h" />
     <ClInclude Include="ClickableWidget.h" />
+    <ClInclude Include="HoldableWidget.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Widget.h" />
     <ClInclude Include="WindowApplication.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SimpleButton.cpp" />
     <ClCompile Include="ClickableWidget.cpp" />
+    <ClCompile Include="HoldableWidget.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
