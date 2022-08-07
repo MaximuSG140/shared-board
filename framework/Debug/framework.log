@@ -1,6 +1,4 @@
 ﻿  BasicEdit.cpp
 C:\Users\Maxim\IdeaProjects\BattleRoyalRefactored\shared-board\framework\BasicEdit.cpp(12,67): warning C4018: <: несоответствие типов со знаком и без знака
 C:\Users\Maxim\IdeaProjects\BattleRoyalRefactored\shared-board\framework\BasicEdit.cpp(13,62): warning C4018: <: несоответствие типов со знаком и без знака
-  WindowApplication.cpp
-  Создание кода...
   framework.vcxproj -> C:\Users\Maxim\IdeaProjects\BattleRoyalRefactored\shared-board\Debug\framework.lib

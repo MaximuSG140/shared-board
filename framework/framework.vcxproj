@@ -174,10 +174,8 @@
   <ItemGroup>
     <ClCompile Include="BasicEdit.cpp" />
     <ClCompile Include="IMouseClickable.cpp" />
-    <ClCompile Include="IMouseAccessible.cpp" />
     <ClCompile Include="IMouseHoldable.cpp" />
     <ClCompile Include="IMouseSelectable.cpp" />
-    <ClCompile Include="IKeyboardListener.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

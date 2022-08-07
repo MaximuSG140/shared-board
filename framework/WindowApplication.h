@@ -1,7 +1,10 @@
 #pragma once
 #include "pch.h"
 #include "Application.h"
+#include "IKeyboardListener.h"
 #include "IMouseClickable.h"
+#include "IMouseHoldable.h"
+#include "IMouseSelectable.h"
 #include "Widget.h"
 
 class WindowApplication :
@@ -27,6 +30,9 @@ private:
     sf::RenderWindow main_window_;
     std::vector<std::unique_ptr<Widget>> widgets_;
     std::vector<IMouseClickable*> clickable_widgets_;
+    std::vector<IMouseHoldable*> holdable_widgets_;
+    std::vector<IMouseSelectable*> selectable_widgets_;
+    std::vector<IKeyboardListener*> keyboard_widgets_;
 };
 
 template <typename... T>
@@ -44,6 +50,18 @@ WidgetType* WindowApplication::addWidget(ConstructorArgs&&... widget_parameters)
     if constexpr (std::is_base_of_v<IMouseClickable, WidgetType>)
     {
         clickable_widgets_.push_back(static_cast<IMouseClickable*>(new_widget));
+    }
+    if constexpr (std::is_base_of_v<IMouseHoldable, WidgetType>)
+    {
+        holdable_widgets_.push_back(static_cast<IMouseHoldable*>(new_widget));
+    }
+    if constexpr (std::is_base_of_v<IMouseSelectable, WidgetType>)
+    {
+        selectable_widgets_.push_back(static_cast<IMouseSelectable*>(new_widget));
+    }
+    if constexpr (std::is_base_of_v<IKeyboardListener, WidgetType>)
+    {
+        keyboard_widgets_.push_back(static_cast<IKeyboardListener*>(new_widget));
     }
 
     return static_cast<WidgetType*>(new_widget);

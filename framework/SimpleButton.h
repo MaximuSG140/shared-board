@@ -4,7 +4,7 @@
 
 template<typename FunctorType>
 class SimpleButton :
-    public IMouseClickable
+    public Widget, IMouseClickable
 {
 public:
 	explicit SimpleButton(std::string text,
@@ -12,7 +12,7 @@ public:
 		sf::Vector2u size,
 		FunctorType&& on_click_action);
 
-	bool containsPoint(sf::Vector2i point_coordinates) const override;
+	[[nodiscard]] bool containsCursor(sf::Vector2i point_coordinates) const override;
 
 	constexpr static sf::Color BODY_COLOR{ 230, 230, 230 };
 	constexpr static sf::Color OUTLINE_COLOR{ 220, 220, 220 };
@@ -23,8 +23,8 @@ protected:
 	void onClick() override;
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 private:
-	sf::Vector2i calculateTextPosition(const sf::Text& text_to_pose)const;
-	unsigned calculateLetterSize() const;
+	[[nodiscard]] sf::Vector2i calculateTextPosition(const sf::Text& text_to_pose)const;
+	[[nodiscard]] unsigned calculateLetterSize() const;
 
 	std::string text_;
 	FunctorType on_click_action_;
@@ -35,7 +35,7 @@ SimpleButton<FunctorType>::SimpleButton(std::string text,
                             const sf::Vector2i position,
                             const sf::Vector2u size,
                             FunctorType&& on_click_action)
-	: IMouseClickable("Button " + text,
+	: Widget("Button " + text,
 	                  position,
 	                  size),
 	text_(std::move(text)),
@@ -43,7 +43,7 @@ SimpleButton<FunctorType>::SimpleButton(std::string text,
 {}
 
 template <typename FunctorType>
-bool SimpleButton<FunctorType>::containsPoint(const sf::Vector2i point_coordinates) const
+bool SimpleButton<FunctorType>::containsCursor(const sf::Vector2i point_coordinates) const
 {
 	auto button_position = position();
 	auto button_size = size();
@@ -100,8 +100,8 @@ unsigned SimpleButton<FunctorType>::calculateLetterSize() const
 	{
 		auto new_bound = (letter_size_right + letter_size_left) / 2;
 		sf::Text test_text(text_, sf::Font(), new_bound);
-		auto text_bounds = test_text.getLocalBounds();
-		if(text_bounds.width > button_size.x / 2 || 
+		if(auto text_bounds = test_text.getLocalBounds();
+			text_bounds.width > button_size.x / 2 || 
 			text_bounds.height > button_size.y / 2)
 		{
 			letter_size_right = new_bound;
