@@ -1,6 +1,5 @@
 #pragma once
 #include "IKeyboardListener.h"
-#include "IMouseClickable.h"
 #include "IMouseSelectable.h"
 
 

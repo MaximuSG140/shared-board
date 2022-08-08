@@ -46,7 +46,7 @@ WidgetType* WindowApplication::addWidget(ConstructorArgs&&... widget_parameters)
     static_assert(std::is_base_of_v<Widget, WidgetType> &&
         "New widget should be derived from class Widget");
     widgets_.push_back(std::make_unique<WidgetType>(std::forward<ConstructorArgs>(widget_parameters)...));
-    auto new_widget = widgets_.back().get();
+    auto new_widget = static_cast<WidgetType*>(widgets_.back().get());
     if constexpr (std::is_base_of_v<IMouseClickable, WidgetType>)
     {
         clickable_widgets_.push_back(static_cast<IMouseClickable*>(new_widget));

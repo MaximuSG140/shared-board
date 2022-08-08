@@ -40,6 +40,12 @@ void WindowApplication::baseHandle(const sf::Event& event)
 {
 	switch(event.type)
 	{
+	case sf::Event::KeyPressed:
+		Logger::log(Logger::LogLevel::DEBUG, "Handling 'KeyPressed' event");
+		for(auto widget : keyboard_widgets_)
+		{
+			widget->handleKeyPress(event.key);
+		}
 	case sf::Event::Closed:
 		Logger::log(Logger::LogLevel::DEBUG, "Handling 'Closed' event");
 		main_window_.close();
@@ -53,6 +59,16 @@ void WindowApplication::baseHandle(const sf::Event& event)
 		for(auto widget : clickable_widgets_)
 		{
 			widget->startClick({ event.mouseButton.x,
+				event.mouseButton.y });
+		}
+		for(auto widget : selectable_widgets_)
+		{
+			widget->interact({ event.mouseButton.x,
+				event.mouseButton.y });
+		}
+		for (auto widget : holdable_widgets_)
+		{
+			widget->proceedHolding({ event.mouseButton.x,
 				event.mouseButton.y });
 		}
 		break;
