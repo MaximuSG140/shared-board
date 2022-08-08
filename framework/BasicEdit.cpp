@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "BasicEdit.h"
+#include "Utility.h"
 
 BasicEdit::BasicEdit(const std::string& name,
                      const sf::Vector2i position,
@@ -40,7 +41,11 @@ bool BasicEdit::containsCursor(const sf::Vector2i point_coordinates) const
 
 void BasicEdit::handleKeyPress(const sf::Event::KeyEvent& event)
 {
-	
+	if(!editing_)
+	{
+		return;
+	}
+	text_.push_back(GetCorrespondingCharacter(event));
 }
 
 bool BasicEdit::selected() const
@@ -74,6 +79,16 @@ void BasicEdit::draw(sf::RenderTarget& target,
 	body.setOutlineThickness(OUTLINE_THICKNESS);
 	target.draw(body);
 	target.draw(printable_text);
+}
+
+void BasicEdit::onSelect()
+{
+	editing_ = true;
+}
+
+void BasicEdit::onUnSelect()
+{
+	editing_ = false;
 }
 
 unsigned BasicEdit::calculateLetterSize() const
