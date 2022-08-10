@@ -1,9 +1,10 @@
 #pragma once
 #include "IMouseClickable.h"
+#include "Widget.h"
 #include "logger/log.h"
 
 template<typename FunctorType>
-class SimpleButton :
+class SimpleButton final :
     public Widget, IMouseClickable
 {
 public:

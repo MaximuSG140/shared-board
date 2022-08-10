@@ -161,6 +161,7 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="BasicEdit.h" />
+    <ClInclude Include="Canvas.h" />
     <ClInclude Include="IMouseAccessible.h" />
     <ClInclude Include="IMouseSelectable.h" />
     <ClInclude Include="IKeyboardListener.h" />
@@ -174,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicEdit.cpp" />
+    <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="IMouseClickable.cpp" />
     <ClCompile Include="IMouseHoldable.cpp" />
     <ClCompile Include="IMouseSelectable.cpp" />
