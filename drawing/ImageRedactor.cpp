@@ -101,13 +101,33 @@ void ImageRedactor::drawSmoothPoint(const sf::Vector2i position,
 	{
 		for (int y = upper_bound; y < bottom_bound; ++y)
 		{
-			if (auto distance = 
-				CalculateEuclideanDistance(position, { x, y }) < thickness)
+			auto distance = CalculateEuclideanDistance(position, { x, y });
+			if (distance < thickness)
 			{
-				image_->drawSmoothPixel(x, y, color);
+				auto muted_color = color;
+				muted_color.a = static_cast<sf::Uint8>(color.a * distance / thickness);
+				drawSmoothPixel(x, y, muted_color);
 			}
 		}
 	}
+}
+
+void ImageRedactor::drawSegment(const sf::Vector2i first,
+                                const sf::Vector2i second,
+                                void (ImageRedactor::* draw_point)(sf::Vector2i,
+                                                                   int,
+                                                                   const sf::Color&),
+                                const int thickness,
+                                const sf::Color& color)
+{
+	drawSegment(first,
+		second,
+		[=](const sf::Vector2i position)
+	{
+		(this->*draw_point)(position,
+			thickness,
+			color);
+	});
 }
 
 bool ImageRedactor::isValidPoint(const sf::Vector2i point) const

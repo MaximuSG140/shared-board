@@ -21,7 +21,6 @@ public:
 	void drawPoint(sf::Vector2i position,
 	               int thickness,
 	               const sf::Color& color = sf::Color::Black);
-
 	void drawSmoothPoint(sf::Vector2i position,
 		int thickness,
 		const sf::Color& color = sf::Color::Black);
@@ -30,6 +29,13 @@ public:
 	void drawSegment(sf::Vector2i first,
 	                 sf::Vector2i second,
 	                 const DrawPointT& draw_point);
+	void drawSegment(sf::Vector2i first,
+	                 sf::Vector2i second,
+	                 void (ImageRedactor::*draw_point)(sf::Vector2i,
+	                                                   int,
+	                                                   const sf::Color&),
+	                 int thickness,
+	                 const sf::Color& color);
 	
 private:
 	template<typename DrawPointT>
