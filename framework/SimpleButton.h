@@ -21,7 +21,7 @@ public:
 
 	constexpr static int OUTLINE_THICKNESS = 3;
 protected:
-	void onClick() override;
+	void onClick(sf::Vector2i position) override;
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 private:
 	[[nodiscard]] sf::Vector2i calculateTextPosition(const sf::Text& text_to_pose)const;
@@ -57,7 +57,7 @@ bool SimpleButton<FunctorType>::containsCursor(const sf::Vector2i point_coordina
 }
 
 template <typename FunctorType>
-void SimpleButton<FunctorType>::onClick()
+void SimpleButton<FunctorType>::onClick(sf::Vector2i position)
 {
 	Logger::log(Logger::LogLevel::INFO, "Activating" + name());
 	on_click_action_();

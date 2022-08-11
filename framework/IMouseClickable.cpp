@@ -11,7 +11,7 @@ void IMouseClickable::endClick(const sf::Vector2i mouse_position)
 	if(containsCursor(mouse_position) && click_started_)
 	{
 		click_started_ = false;
-		onClick();
+		onClick(mouse_position);
 	}
 	click_started_ = false;
 }

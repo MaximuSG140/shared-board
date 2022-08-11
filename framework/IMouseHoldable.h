@@ -8,7 +8,7 @@ class IMouseHoldable
 public:
     void proceedHolding(sf::Vector2i mouse_position);
 protected:
-    virtual void onHold() = 0;
+    virtual void onHold(sf::Vector2i mouse_position) = 0;
     virtual void onHoldEnded() = 0;
 };
 

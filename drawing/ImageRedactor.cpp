@@ -1,8 +1,5 @@
 #include "pch.h"
 #include "ImageRedactor.h"
-
-#include <cassert>
-
 #include "Geometry.h"
 
 ImageRedactor::ImageRedactor()

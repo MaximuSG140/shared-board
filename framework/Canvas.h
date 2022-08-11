@@ -3,6 +3,7 @@
 #include "IMouseHoldable.h"
 #include "Widget.h"
 
+#include "drawing/ImageRedactor.h"
 
 class Canvas final :
     public Widget, IMouseClickable, IMouseHoldable
@@ -26,19 +27,31 @@ public:
 	[[nodiscard]] bool containsCursor(sf::Vector2i cursor_point) const override;
 protected:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-    void onClick() override;
-    void onHold() override;
+    void onClick(sf::Vector2i mouse_position) override;
+    void onHold(sf::Vector2i mouse_position) override;
     void onHoldEnded() override;
 private:
-    sf::Image canvas_image_;
-    std::function<void(sf::Vector2i)> hold_action_;
-    std::function<void(sf::Vector2i)> hold_ended_action_;
-    std::function<void(sf::Vector2i)> click_action_;
+    ImageRedactor redactor_;
+    std::function<void(sf::Vector2i)> hold_action_ = [](sf::Vector2i){};
+    std::function<void()> hold_ended_action_ = []() {};
+    std::function<void(sf::Vector2i)> click_action_ = [](sf::Vector2i) {};
 };
 
 template <typename F>
 void Canvas::setHoldAction(F&& function)
 {
     hold_action_ = std::forward<F>(function);
+}
+
+template <typename F>
+void Canvas::setHoldEndedAction(F&& function)
+{
+    hold_ended_action_ = std::forward<F>(function);
+}
+
+template <typename F>
+void Canvas::setClickAction(F&& function)
+{
+    click_action_ = std::forward<F>(function);
 }
 
