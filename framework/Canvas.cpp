@@ -18,8 +18,45 @@ Canvas::Canvas(const sf::Vector2i position,
 		size.y)
 {}
 
+void Canvas::selectPencil(const int thickness,
+                       const sf::Color& color)
+{
+	unSelectAllTools();
+	
+}
+
+void Canvas::selectBrush(int thickness, const sf::Color& color)
+{
+	unSelectAllTools();
+	hold_action_ = [&,
+		previous_x = 0,
+		previous_y = 0,
+		first = true]
+		(const sf::Vector2i position)mutable
+	{
+		if (!first)
+		{
+			redactor_.drawSegment({ previous_x, previous_y },
+				position,
+				&ImageRedactor::drawPoint,
+				thickness,
+				color);
+			first = false;
+		}
+		previous_x = position.x;
+		previous_y = position.y;
+	};
+}
+
+void Canvas::unSelectAllTools()
+{
+	click_action_ = [](sf::Vector2i) {};
+	hold_action_ = [](sf::Vector2i) {};
+	hold_ended_action_ = []() {};
+}
+
 void Canvas::draw(sf::RenderTarget& target,
-	sf::RenderStates states) const
+                  sf::RenderStates states) const
 {
 	auto canvas_size = size();
 	auto canvas_position = position();
