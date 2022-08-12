@@ -1,19 +1,17 @@
 #pragma once
 #include "IMouseClickable.h"
-#include "Widget.h"
+#include "RectangleWidget.h"
 #include "logger/log.h"
 
-template<typename FunctorType>
+template<typename FunctorT>
 class SimpleButton final :
-    public Widget, IMouseClickable
+    public RectangleWidget, IMouseClickable
 {
 public:
 	explicit SimpleButton(std::string text,
 		sf::Vector2i position,
 		sf::Vector2u size,
-		FunctorType&& on_click_action);
-
-	[[nodiscard]] bool containsCursor(sf::Vector2i point_coordinates) const override;
+		FunctorT&& on_click_action);
 
 	constexpr static sf::Color BODY_COLOR{ 230, 230, 230 };
 	constexpr static sf::Color OUTLINE_COLOR{ 220, 220, 220 };
@@ -28,7 +26,7 @@ private:
 	[[nodiscard]] unsigned calculateLetterSize() const;
 
 	std::string text_;
-	FunctorType on_click_action_;
+	FunctorT on_click_action_;
 };
 
 template <typename FunctorType>
@@ -36,25 +34,12 @@ SimpleButton<FunctorType>::SimpleButton(std::string text,
                             const sf::Vector2i position,
                             const sf::Vector2u size,
                             FunctorType&& on_click_action)
-	: Widget("Button " + text,
+	: RectangleWidget("Button " + text,
 	                  position,
 	                  size),
 	text_(std::move(text)),
 	on_click_action_(std::forward<FunctorType>(on_click_action))
 {}
-
-template <typename FunctorType>
-bool SimpleButton<FunctorType>::containsCursor(const sf::Vector2i point_coordinates) const
-{
-	auto button_position = position();
-	auto button_size = size();
-	auto upper_border = button_position.y;
-	auto bottom_border = button_position.y + button_size.y;
-	auto left_border = button_position.x;
-	auto right_border = button_position.x + button_size.x;
-	return point_coordinates.x >= left_border && point_coordinates.x < right_border &&
-		point_coordinates.y >= upper_border && point_coordinates.y < bottom_border;
-}
 
 template <typename FunctorType>
 void SimpleButton<FunctorType>::onClick(sf::Vector2i position)

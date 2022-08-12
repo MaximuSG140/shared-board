@@ -165,6 +165,7 @@
     <ClInclude Include="IMouseAccessible.h" />
     <ClInclude Include="IMouseSelectable.h" />
     <ClInclude Include="IKeyboardListener.h" />
+    <ClInclude Include="RectangleWidget.h" />
     <ClInclude Include="SimpleButton.h" />
     <ClInclude Include="IMouseClickable.h" />
     <ClInclude Include="IMouseHoldable.h" />
@@ -185,6 +186,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="RectangleWidget.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="Widget.cpp" />
     <ClCompile Include="WindowApplication.cpp" />
@@ -199,9 +201,6 @@
     <ProjectReference Include="..\logger\logger.vcxproj">
       <Project>{a10bb264-67a1-410c-aee0-b293a0eb74cf}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="framework.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

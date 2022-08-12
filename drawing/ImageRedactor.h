@@ -50,3 +50,46 @@ private:
 	std::unique_ptr<sf::Image> image_;
 };
 
+template <typename DrawPointT>
+void ImageRedactor::drawSegment(sf::Vector2i first,
+	sf::Vector2i second,
+	const DrawPointT& draw_point)
+{
+	if (!isValidPoint(first) || !isValidPoint(second))
+	{
+		throw std::out_of_range("Attempt to draw pixel out of image bounds");
+	}
+	if (first.x == second.x)
+	{
+		drawVerticalSegment(first,
+			second,
+			draw_point);
+		return;
+	}
+	if (first.x > second.x)
+	{
+		std::swap(first, second);
+	}
+	auto vertical_shift = second.y - first.y;
+	auto shift_per_pixel = vertical_shift / static_cast<float>(second.x - first.x);
+	for (int x = first.x; x <= second.x; ++x)
+	{
+		draw_point(x,
+			static_cast<int>(first.y + 0.5f + (x - first.x) * shift_per_pixel));
+	}
+}
+
+template<typename DrawPointT>
+void ImageRedactor::drawVerticalSegment(const sf::Vector2i start,
+	const sf::Vector2i end,
+	const DrawPointT& draw_point)
+{
+	assert(start.x == end.x && "Segment should be vertical");
+	auto upper_point = std::min(start.y, end.y);
+	auto lower_point = std::max(start.y, end.y);
+	auto x_coordinate = start.x;
+	for (int i = upper_point; i <= lower_point; ++i)
+	{
+		draw_point(x_coordinate, i);
+	}
+}

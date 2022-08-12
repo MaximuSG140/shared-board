@@ -1,10 +1,11 @@
 #pragma once
 #include "IKeyboardListener.h"
 #include "IMouseSelectable.h"
+#include "RectangleWidget.h"
 
 
-class BasicEdit :
-    public Widget, IMouseSelectable, IKeyboardListener
+class BasicEdit final :
+    public RectangleWidget, IMouseSelectable, IKeyboardListener
 {
 public:
     explicit BasicEdit(const std::string& name,
@@ -16,9 +17,6 @@ public:
 
     void setText(std::string new_text);
     [[nodiscard]] std::string text()const;
-
-    [[nodiscard]] bool containsCursor(sf::Vector2i point_coordinates) const override;
-
 	void handleKeyPress(const sf::Event::KeyEvent& event) override;
     [[nodiscard]] bool selected() const override;
 protected:
