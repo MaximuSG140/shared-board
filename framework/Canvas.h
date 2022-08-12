@@ -1,12 +1,12 @@
 #pragma once
 #include "IMouseClickable.h"
 #include "IMouseHoldable.h"
-#include "Widget.h"
+#include "RectangleWidget.h"
 
 #include "drawing/ImageRedactor.h"
 
 class Canvas final :
-    public Widget, IMouseClickable, IMouseHoldable
+    public RectangleWidget, IMouseClickable, IMouseHoldable
 {
 public:
     explicit Canvas(const std::string& name,
@@ -23,8 +23,6 @@ public:
 
     template<typename F>
     void setClickAction(F&& function);
-
-	[[nodiscard]] bool containsCursor(sf::Vector2i cursor_point) const override;
 protected:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     void onClick(sf::Vector2i mouse_position) override;

@@ -30,10 +30,12 @@ sf::Vector2u WindowApplication::windowSize() const
 void WindowApplication::render()
 {
 	Logger::log(Logger::LogLevel::INFO, "Redrawing client area");
+	main_window_.clear(sf::Color::White);
 	for(const auto& widget : widgets_)
 	{
 		main_window_.draw(*widget);
 	}
+	main_window_.display();
 }
 
 void WindowApplication::baseHandle(const sf::Event& event)
