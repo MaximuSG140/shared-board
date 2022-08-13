@@ -161,10 +161,13 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="BasicEdit.h" />
+    <ClInclude Include="Brush.h" />
     <ClInclude Include="Canvas.h" />
+    <ClInclude Include="IDrawingTool.h" />
     <ClInclude Include="IMouseAccessible.h" />
     <ClInclude Include="IMouseSelectable.h" />
     <ClInclude Include="IKeyboardListener.h" />
+    <ClInclude Include="Pencil.h" />
     <ClInclude Include="RectangleWidget.h" />
     <ClInclude Include="SimpleButton.h" />
     <ClInclude Include="IMouseClickable.h" />
@@ -176,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicEdit.cpp" />
+    <ClCompile Include="Brush.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="IMouseClickable.cpp" />
     <ClCompile Include="IMouseHoldable.cpp" />
@@ -186,6 +190,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Pencil.cpp" />
     <ClCompile Include="RectangleWidget.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="Widget.cpp" />

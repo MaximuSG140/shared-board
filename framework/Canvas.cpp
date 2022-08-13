@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "Canvas.h"
 
+#include "Brush.h"
+#include "Pencil.h"
+
 Canvas::Canvas(const std::string& name,
                const sf::Vector2i position,
                const sf::Vector2u size)
@@ -19,42 +22,18 @@ Canvas::Canvas(const sf::Vector2i position,
 {}
 
 void Canvas::selectPencil(const int thickness,
-                       const sf::Color& color)
+                          const sf::Color& color)
 {
-	unSelectAllTools();
-	
+	tool_ = std::make_unique<Pencil>(thickness,
+		color);
 }
 
-void Canvas::selectBrush(int thickness, const sf::Color& color)
+void Canvas::selectBrush(const int thickness,
+                         const sf::Color& color)
 {
-	unSelectAllTools();
-	hold_action_ = [&,
-		previous_x = 0,
-		previous_y = 0,
-		first = true]
-		(const sf::Vector2i position)mutable
-	{
-		if (!first)
-		{
-			redactor_.drawSegment({ previous_x, previous_y },
-				position,
-				&ImageRedactor::drawPoint,
-				thickness,
-				color);
-			first = false;
-		}
-		previous_x = position.x;
-		previous_y = position.y;
-	};
+	tool_ = std::make_unique<Brush>(thickness,
+		color);
 }
-
-void Canvas::unSelectAllTools()
-{
-	click_action_ = [](sf::Vector2i) {};
-	hold_action_ = [](sf::Vector2i) {};
-	hold_ended_action_ = []() {};
-}
-
 void Canvas::draw(sf::RenderTarget& target,
                   sf::RenderStates states) const
 {
@@ -79,15 +58,17 @@ void Canvas::draw(sf::RenderTarget& target,
 
 void Canvas::onClick(const sf::Vector2i mouse_position)
 {
-	click_action_(mouse_position);
+	tool_->click(redactor_,
+		mouse_position);
 }
 
 void Canvas::onHold(const sf::Vector2i mouse_position)
 {
-	hold_action_(mouse_position);
+	tool_->hold(redactor_,
+		mouse_position);
 }
 
 void Canvas::onHoldEnded()
 {
-	hold_ended_action_();
+	tool_->unHold(redactor_);
 }
