@@ -17,8 +17,8 @@ Canvas::Canvas(const sf::Vector2i position,
 	: RectangleWidget("Unnamed canvas",
 		position,
 		size),
-	redactor_(size.x,
-		size.y)
+	redactor_(static_cast<int>(size.x),
+		static_cast<int>(size.y))
 {}
 
 void Canvas::selectPencil(const int thickness,
