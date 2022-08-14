@@ -3,3 +3,4 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 #include <limits>
+#include <cassert>
