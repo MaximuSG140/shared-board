@@ -58,14 +58,16 @@ void Canvas::draw(sf::RenderTarget& target,
 
 void Canvas::onClick(const sf::Vector2i mouse_position)
 {
+	auto relative_position = mouse_position - position();
 	tool_->click(redactor_,
-		mouse_position);
+		relative_position);
 }
 
 void Canvas::onHold(const sf::Vector2i mouse_position)
 {
+	auto relative_position = mouse_position - position();
 	tool_->hold(redactor_,
-		mouse_position);
+		relative_position);
 }
 
 void Canvas::onHoldEnded()
