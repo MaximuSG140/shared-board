@@ -8,6 +8,7 @@ ImageRedactor::ImageRedactor()
 
 ImageRedactor::ImageRedactor(const int width,
                              const int height)
+	: image_(std::make_unique<sf::Image>())
 {
 	image_->create(width,
 		height,

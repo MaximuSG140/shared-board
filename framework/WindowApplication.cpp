@@ -82,7 +82,7 @@ void WindowApplication::baseHandle(const sf::Event& event)
 		}
 		for (auto widget : holdable_widgets_)
 		{
-			widget->proceedHolding({ event.mouseButton.x,
+			widget->startHolding({ event.mouseButton.x,
 				event.mouseButton.y });
 		}
 		break;
@@ -94,10 +94,20 @@ void WindowApplication::baseHandle(const sf::Event& event)
 			widget->endClick({ event.mouseButton.x,
 				event.mouseButton.y });
 		}
+		for(auto widget : holdable_widgets_)
+		{
+			widget->endHolding({event.mouseButton.x,
+				event.mouseButton.y});
+		}
 		break;
 	case sf::Event::MouseMoved:
 		Logger::log(Logger::LogLevel::DEBUG,
 			"Handling 'MouseMoved' event");
+		for(auto widget : holdable_widgets_)
+		{
+			widget->proceedHolding({ event.mouseMove.x,
+				event.mouseMove.y });
+		}
 		break;
 	default:;
 	}
