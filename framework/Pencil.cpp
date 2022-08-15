@@ -17,12 +17,12 @@ void Pencil::hold(ImageRedactor& redactor,
 			&ImageRedactor::drawPoint,
 			thickness_,
 			color_);
-		first_point_ = false;
 	}
 	redactor.drawPoint(position,
 		thickness_,
 		color_);
 	previous_point_ = position;
+	first_point_ = false;
 }
 
 void Pencil::unHold(ImageRedactor& redactor)
