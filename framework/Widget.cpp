@@ -53,3 +53,18 @@ void Widget::scale(const sf::Vector2f scale_proportions)
 	Logger::log(Logger::LogLevel::DEBUG, "Widget " + name_ + " was scaled for " +
 		std::to_string(scale_proportions.x) + " " + std::to_string(scale_proportions.y));
 }
+
+void Widget::invalidate() const
+{
+	valid_ = false;
+}
+
+bool Widget::valid() const
+{
+	return valid_;
+}
+
+void Widget::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+	valid_ = true;
+}

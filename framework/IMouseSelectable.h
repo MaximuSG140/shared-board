@@ -3,7 +3,7 @@
 
 
 class IMouseSelectable
-	:public IMouseAccessible
+	:public virtual IMouseAccessible
 {
 public:
 	void interact(sf::Vector2i mouse_position);
