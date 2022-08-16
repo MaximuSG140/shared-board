@@ -17,12 +17,12 @@ void Brush::hold(ImageRedactor& redactor,
 			&ImageRedactor::drawSmoothPoint,
 			thickness_,
 			color_);
-		first_point_ = false;
 	}
 	redactor.drawSmoothPoint(position,
 		thickness_,
 		color_);
 	previous_point_ = position;
+	first_point_ = false;
 }
 
 void Brush::unHold(ImageRedactor& redactor)

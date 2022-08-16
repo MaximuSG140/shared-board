@@ -8,6 +8,7 @@ ImageRedactor::ImageRedactor()
 
 ImageRedactor::ImageRedactor(const int width,
                              const int height)
+	: image_(std::make_unique<sf::Image>())
 {
 	image_->create(width,
 		height,
@@ -102,8 +103,8 @@ void ImageRedactor::drawSmoothPoint(const sf::Vector2i position,
 			if (distance < thickness)
 			{
 				auto muted_color = color;
-				muted_color.a = static_cast<sf::Uint8>(color.a * distance / thickness);
-				drawSmoothPixel(x, y, muted_color);
+				muted_color.a = static_cast<sf::Uint8>(color.a * (1 - distance / thickness));
+				image_->setPixel(x, y, muted_color);
 			}
 		}
 	}
@@ -145,11 +146,12 @@ void ImageRedactor::drawSmoothPixel(const int x,
 	sf::Color result_color;
 	result_color.a = static_cast<sf::Uint8>(static_cast<int>(current_color.a) + color.a - 
 		static_cast<int>(current_color.a) * color.a / MAXIMAL_ALPHA_VALUE);
-	auto calculate_color_component = [=](auto new_component, auto old_component)->auto
+	auto calculate_color_component = [=](auto new_component,
+		auto old_component)->auto
 	{
 		return static_cast<sf::Uint8>((static_cast<int>(old_component) * current_color.a -
-			static_cast<int>(new_component) * color.a * current_color.a +
-			static_cast<int>(new_component) * color.a) / MAXIMAL_ALPHA_VALUE);
+			static_cast<int>(new_component) * result_color.a * current_color.a / MAXIMAL_ALPHA_VALUE +
+			static_cast<int>(new_component) * result_color.a) / MAXIMAL_ALPHA_VALUE);
 	};
 	result_color.r = calculate_color_component(color.r, current_color.r);
 	result_color.g = calculate_color_component(color.g, current_color.g);

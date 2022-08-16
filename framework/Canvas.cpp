@@ -9,7 +9,9 @@ Canvas::Canvas(const std::string& name,
                const sf::Vector2u size)
 	: RectangleWidget(name,
 		position,
-		size)
+		size),
+	redactor_(size.x,
+		size.y)
 {}
 
 Canvas::Canvas(const sf::Vector2i position,
@@ -54,23 +56,38 @@ void Canvas::draw(sf::RenderTarget& target,
 		static_cast<float>(canvas_position.y));
 	target.draw(body);
 	target.draw(sprite);
+	Widget::draw(target, states);
 }
 
 void Canvas::onClick(const sf::Vector2i mouse_position)
 {
-	auto relative_position = mouse_position - position();
-	tool_->click(redactor_,
-		relative_position);
+	if(tool_)
+	{
+		auto relative_position = mouse_position - position();
+		tool_->click(redactor_,
+			relative_position);
+	}
 }
 
 void Canvas::onHold(const sf::Vector2i mouse_position)
 {
-	auto relative_position = mouse_position - position();
-	tool_->hold(redactor_,
-		relative_position);
+	if(tool_)
+	{
+		auto relative_position = mouse_position - position();
+		tool_->hold(redactor_,
+			relative_position);
+	}
 }
 
 void Canvas::onHoldEnded()
 {
-	tool_->unHold(redactor_);
+	if(tool_)
+	{
+		tool_->unHold(redactor_);
+	}
+}
+
+bool Canvas::containsCursor(const sf::Vector2i cursor_point) const
+{
+	return RectangleWidget::containsCursor(cursor_point);
 }

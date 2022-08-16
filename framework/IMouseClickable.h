@@ -3,7 +3,7 @@
 
 
 class IMouseClickable
-    :public IMouseAccessible
+    : public IMouseAccessible
 {
 public:
     void startClick(sf::Vector2i mouse_position);

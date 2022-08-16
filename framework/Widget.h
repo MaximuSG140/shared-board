@@ -19,8 +19,13 @@ public:
 	void setSize(sf::Vector2u size);
 
 	void scale(sf::Vector2f scale_proportions);
+
+	void invalidate() const;
+	[[nodiscard]] bool valid()const;
+	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 private:
 	const std::string name_;
 	sf::Vector2i position_;
 	sf::Vector2u size_;
+	mutable bool valid_ = false;
 };
