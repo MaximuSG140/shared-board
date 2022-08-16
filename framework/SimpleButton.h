@@ -26,8 +26,7 @@ protected:
 private:
 	[[nodiscard]] sf::Vector2i calculateTextPosition(const sf::Text& text_to_pose)const;
 	[[nodiscard]] unsigned calculateLetterSize() const;
-	
-private:
+
 	std::string text_;
 	std::function<void()> on_click_action_;
 };
@@ -77,6 +76,7 @@ inline void SimpleButton::draw(sf::RenderTarget& target, sf::RenderStates states
 		static_cast<float>(text_position.y));
 	printable_text.setFillColor(TEXT_COLOR);
 	target.draw(printable_text);
+	Widget::draw(target, states);
 }
 
 inline sf::Vector2i SimpleButton::calculateTextPosition(const sf::Text& text_to_pose) const

@@ -4,7 +4,8 @@
 #include "framework/SimpleButton.h"
 
 StandaloneApplication::StandaloneApplication()
-	: WindowApplication(sf::VideoMode(1000, 800),
+	: WindowApplication(sf::VideoMode(1280,
+		840),
 		"Drawer")
 {
 	auto canvas = addWidget<Canvas>("Main",

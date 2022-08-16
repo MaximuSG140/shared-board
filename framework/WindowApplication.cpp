@@ -7,6 +7,8 @@ void WindowApplication::run()
 {
 	Logger::log(Logger::LogLevel::INFO,
 		"Window application started");
+	main_window_.clear(sf::Color::White);
+	render();
 	sf::Event received_event{};
 	while(main_window_.isOpen())
 	{
@@ -34,13 +36,16 @@ sf::Vector2u WindowApplication::windowSize() const
 void WindowApplication::render()
 {
 	Logger::log(Logger::LogLevel::INFO,
-		"Rendering client area");
+		"Rendering changed widgets");
 	main_window_.clear(sf::Color::White);
 	for(const auto& widget : widgets_)
 	{
-		Logger::log(Logger::LogLevel::DEBUG,
+		//if(!widget->valid())
+		{
+			Logger::log(Logger::LogLevel::DEBUG,
 			"Rendering " + widget->name());
-		main_window_.draw(*widget);
+			main_window_.draw(*widget);
+		}
 	}
 	main_window_.display();
 }
@@ -62,11 +67,22 @@ void WindowApplication::baseHandle(const sf::Event& event)
 		main_window_.close();
 		break;
 	case sf::Event::Resized:
-		Logger::log(Logger::LogLevel::DEBUG,
+		{
+			Logger::log(Logger::LogLevel::DEBUG,
 			"Handling 'Resized' event");
-		main_window_.setSize({ event.size.width,
-			event.size.height });
-		break;
+			auto old_size = main_window_.getSize();
+			sf::Vector2u new_size{ event.size.width,
+				event.size.height };
+			main_window_.setSize({ event.size.width,
+				event.size.height });
+			sf::Vector2f proportions{ static_cast<float>(new_size.x) / old_size.x,
+				static_cast<float>(new_size.y) / old_size.y };
+			for (const auto& widget : widgets_)
+			{
+				widget->scale(proportions);
+			}
+			break;
+		}
 	case sf::Event::MouseButtonPressed:
 		Logger::log(Logger::LogLevel::DEBUG,
 			"Handling 'MouseButtonPressed' event");
@@ -109,7 +125,8 @@ void WindowApplication::baseHandle(const sf::Event& event)
 				event.mouseMove.y });
 		}
 		break;
-	default:;
+	default:
+		return;
 	}
 	handle(event);
 	render();
