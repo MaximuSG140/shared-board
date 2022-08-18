@@ -163,16 +163,24 @@
     <ClInclude Include="BasicEdit.h" />
     <ClInclude Include="Brush.h" />
     <ClInclude Include="Canvas.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="FileExplorer.h" />
+    <ClInclude Include="DirectoryElement.h" />
+    <ClInclude Include="RegularFileElement.h" />
+    <ClInclude Include="FontOwner.h" />
+    <ClInclude Include="IFileExplorerElement.h" />
     <ClInclude Include="IDrawingTool.h" />
     <ClInclude Include="IMouseAccessible.h" />
     <ClInclude Include="IMouseSelectable.h" />
     <ClInclude Include="IKeyboardListener.h" />
     <ClInclude Include="Pencil.h" />
     <ClInclude Include="RectangleWidget.h" />
+    <ClInclude Include="Resources.h" />
     <ClInclude Include="SimpleButton.h" />
     <ClInclude Include="IMouseClickable.h" />
     <ClInclude Include="IMouseHoldable.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="TextureOwner.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="Widget.h" />
     <ClInclude Include="WindowApplication.h" />
@@ -181,6 +189,12 @@
     <ClCompile Include="BasicEdit.cpp" />
     <ClCompile Include="Brush.cpp" />
     <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="FileExplorer.cpp" />
+    <ClCompile Include="DirectoryElement.cpp" />
+    <ClCompile Include="RegularFileElement.cpp" />
+    <ClCompile Include="FontOwner.cpp" />
+    <ClCompile Include="IFileExplorerElement.cpp" />
     <ClCompile Include="IMouseClickable.cpp" />
     <ClCompile Include="IMouseHoldable.cpp" />
     <ClCompile Include="IMouseSelectable.cpp" />
@@ -192,6 +206,8 @@
     </ClCompile>
     <ClCompile Include="Pencil.cpp" />
     <ClCompile Include="RectangleWidget.cpp" />
+    <ClCompile Include="Resources.cpp" />
+    <ClCompile Include="TextureOwner.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="Widget.cpp" />
     <ClCompile Include="WindowApplication.cpp" />
