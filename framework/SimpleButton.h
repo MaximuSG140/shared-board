@@ -1,10 +1,11 @@
 #pragma once
-#include "IMouseClickable.h"
+#include "Button.h"
 #include "RectangleWidget.h"
+#include "Resources.h"
 #include "logger/log.h"
 
 class SimpleButton final :
-    public RectangleWidget, public IMouseClickable
+    public Button
 {
 public:
 	template<typename FunctorT>
@@ -18,8 +19,6 @@ public:
 	inline const static sf::Color TEXT_COLOR = {0, 0, 0};
 
 	constexpr static int OUTLINE_THICKNESS = 3;
-
-	[[nodiscard]] bool containsCursor(sf::Vector2i cursor_point) const override;
 protected:
 	void onClick(sf::Vector2i position) override;
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
@@ -36,7 +35,7 @@ SimpleButton::SimpleButton(std::string text,
                             const sf::Vector2i position,
                             const sf::Vector2u size,
                             FunctorType&& on_click_action)
-	: RectangleWidget("Button " + text,
+	: Button(text,
 	                  position,
 	                  size),
 	text_(std::move(text)),
@@ -62,14 +61,8 @@ inline void SimpleButton::draw(sf::RenderTarget& target, sf::RenderStates states
 	body.setPosition({static_cast<float>(button_position.x),
 		static_cast<float>(button_position.y)});
 	target.draw(body, states);
-	sf::Font text_font;
-	if(text_font.loadFromFile("OpenSans-Regular.ttf"))
-	{
-		Logger::log(Logger::LogLevel::DEBUG,
-			"Font loaded successfully");
-	}
 	sf::Text printable_text(text_,
-		text_font,
+		GetDefaultFont(),
 		calculateLetterSize());
 	auto text_position = calculateTextPosition(printable_text);
 	printable_text.setPosition(static_cast<float>(text_position.x),
@@ -93,17 +86,11 @@ inline unsigned SimpleButton::calculateLetterSize() const
 	unsigned letter_size_left = 1;
 	auto button_size = size();
 	unsigned letter_size_right = std::min(button_size.x / 2, button_size.y / 2);
-	sf::Font text_font;
-	if(text_font.loadFromFile("OpenSans-Regular.ttf"))
-	{
-		Logger::log(Logger::LogLevel::DEBUG,
-			"Font loaded successfully");
-	}
 	while(letter_size_right - letter_size_left > 1)
 	{
 		auto new_bound = (letter_size_right + letter_size_left) / 2;
 		sf::Text test_text(text_,
-			text_font,
+			GetDefaultFont(),
 			new_bound);
 		if(auto text_bounds = test_text.getLocalBounds();
 			text_bounds.width > button_size.x / 2 || 
@@ -117,10 +104,5 @@ inline unsigned SimpleButton::calculateLetterSize() const
 		}
 	}
 	return letter_size_left;
-}
-
-inline bool SimpleButton::containsCursor(const sf::Vector2i cursor_point) const
-{
-	return RectangleWidget::containsCursor(cursor_point);
 }
 
