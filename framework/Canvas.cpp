@@ -3,6 +3,7 @@
 
 #include "Brush.h"
 #include "Pencil.h"
+#include "logger/log.h"
 
 Canvas::Canvas(const std::string& name,
                const sf::Vector2i position,
@@ -90,4 +91,22 @@ void Canvas::onHoldEnded()
 bool Canvas::containsCursor(const sf::Vector2i cursor_point) const
 {
 	return RectangleWidget::containsCursor(cursor_point);
+}
+
+void Canvas::loadImage(const std::filesystem::path& path_to_image) const
+{
+	redactor_.loadImage(path_to_image.string());
+}
+
+void Canvas::saveImage(const std::filesystem::path& path_to_image)
+{
+	auto image = redactor_.acquireImage();
+
+	if(!image->saveToFile(path_to_image.string()))
+	{
+		Logger::log(Logger::LogLevel::ERROR,
+			"Unable to save image as " + path_to_image.string());
+	}
+
+	redactor_.loadImage(std::move(image));
 }

@@ -24,13 +24,15 @@ public:
         const sf::Color& color = sf::Color::Black);
 
 	[[nodiscard]] bool containsCursor(sf::Vector2i cursor_point) const override;
+
+    void loadImage(const std::filesystem::path& path_to_image) const;
+    void saveImage(const std::filesystem::path& path_to_image);
 protected:
     void draw(sf::RenderTarget& target,
         sf::RenderStates states) const override;
     void onClick(sf::Vector2i mouse_position) override;
     void onHold(sf::Vector2i mouse_position) override;
     void onHoldEnded() override;
-    
 private:
     ImageRedactor redactor_;
     std::unique_ptr<IDrawingTool> tool_;
