@@ -5,6 +5,7 @@
 #include "IMouseClickable.h"
 #include "IMouseHoldable.h"
 #include "IMouseSelectable.h"
+#include "IScrollable.h"
 #include "Widget.h"
 
 class WindowApplication :
@@ -33,6 +34,7 @@ private:
     std::vector<IMouseHoldable*> holdable_widgets_;
     std::vector<IMouseSelectable*> selectable_widgets_;
     std::vector<IKeyboardListener*> keyboard_widgets_;
+    std::vector<IScrollable*> scrollable_widgets_;
 };
 
 template <typename... T>
@@ -62,6 +64,10 @@ WidgetType* WindowApplication::addWidget(ConstructorArgs&&... widget_parameters)
     if constexpr (std::is_base_of_v<IKeyboardListener, WidgetType>)
     {
         keyboard_widgets_.push_back(static_cast<IKeyboardListener*>(new_widget));
+    }
+    if constexpr (std::is_base_of_v<IScrollable, WidgetType>)
+    {
+        scrollable_widgets_.push_back(static_cast<IScrollable*>(new_widget));
     }
 
     return static_cast<WidgetType*>(new_widget);

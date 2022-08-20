@@ -1,1 +1,3 @@
-﻿  standalone.vcxproj -> C:\Users\stepa\Documents\GitHub\shared-board\Debug\standalone.exe
+﻿  StandaloneApplication.cpp
+  LINK : не найден или не выполнена сборка C:\Users\stepa\Documents\GitHub\shared-board\Debug\standalone.exe при последней инкрементной компоновке; выполняется полная компоновка
+  standalone.vcxproj -> C:\Users\stepa\Documents\GitHub\shared-board\Debug\standalone.exe
