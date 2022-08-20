@@ -9,6 +9,8 @@ public:
 
 	explicit RegularFileElement(std::string file_name,
 		long long file_size);
+
+	std::string fileName() const override;
 protected:
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 private:

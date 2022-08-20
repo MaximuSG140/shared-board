@@ -8,8 +8,13 @@ DirectoryElement::DirectoryElement(std::string directory_name)
 		: directory_name_(std::move(directory_name))
 {}
 
+std::string DirectoryElement::fileName() const
+{
+    return directory_name_;
+}
+
 void DirectoryElement::draw(sf::RenderTarget& target,
-                                 const sf::RenderStates states) const
+                            const sf::RenderStates states) const
 {
     sf::Sprite icon_sprite(GetDirectoryIcon());
     float scale_proportion = size().y / icon_sprite.getLocalBounds().height;

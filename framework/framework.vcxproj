@@ -167,6 +167,7 @@
     <ClInclude Include="DirectoryElementFactory.h" />
     <ClInclude Include="FileExplorer.h" />
     <ClInclude Include="DirectoryElement.h" />
+    <ClInclude Include="IScrollable.h" />
     <ClInclude Include="RegularFileElement.h" />
     <ClInclude Include="FontOwner.h" />
     <ClInclude Include="IFileExplorerElement.h" />

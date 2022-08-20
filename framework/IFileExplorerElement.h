@@ -9,6 +9,8 @@ public:
 	[[nodiscard]] sf::Vector2i position()const;
 	[[nodiscard]] sf::Vector2u size()const;
 
+	virtual std::string fileName()const = 0;
+
 	void setPosition(sf::Vector2i position);
 	void setSize(sf::Vector2u size);
 private:

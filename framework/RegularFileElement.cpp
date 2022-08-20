@@ -9,8 +9,13 @@ RegularFileElement::RegularFileElement(std::string file_name,
 	file_size_(file_size)
 {}
 
+std::string RegularFileElement::fileName() const
+{
+	return file_name_;
+}
+
 void RegularFileElement::draw(sf::RenderTarget& target,
-	sf::RenderStates states) const
+                              sf::RenderStates states) const
 {
 	sf::Sprite icon_sprite(GetRegularFileIcon());
 	float scale_proportion = size().y / icon_sprite.getLocalBounds().height;
