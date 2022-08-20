@@ -27,8 +27,9 @@ void RegularFileElement::draw(sf::RenderTarget& target,
 		GetDefaultFont(),
 		size().y,
 		size().x - icon_sprite.getLocalBounds().width);
-	directory_name.setPosition(static_cast<float>(position().x) + icon_sprite.getLocalBounds().width,
+	directory_name.setPosition(static_cast<float>(position().x) + icon_sprite.getGlobalBounds().width,
 		static_cast<float>(position().y));
+	directory_name.setFillColor(sf::Color::Black);
 	target.draw(directory_name,
 		states);
 }

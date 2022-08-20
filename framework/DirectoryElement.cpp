@@ -20,12 +20,15 @@ void DirectoryElement::draw(sf::RenderTarget& target,
     float scale_proportion = size().y / icon_sprite.getLocalBounds().height;
     icon_sprite.scale(scale_proportion,
         scale_proportion);
+    icon_sprite.setPosition({ static_cast<float>(position().x),
+		static_cast<float>(position().y)});
     target.draw(icon_sprite,
         states);
     sf::Text directory_name(directory_name_,
         GetDefaultFont(),
         size().y);
-    directory_name.setPosition(static_cast<float>(position().x) + icon_sprite.getLocalBounds().width,
+    directory_name.setFillColor(sf::Color::Black);
+    directory_name.setPosition(static_cast<float>(position().x) + icon_sprite.getGlobalBounds().width,
         static_cast<float>(position().y));
     target.draw(directory_name,
         states);

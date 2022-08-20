@@ -61,6 +61,7 @@ void WindowApplication::baseHandle(const sf::Event& event)
 		{
 			widget->scroll(event.mouseWheel.delta);
 		}
+		break;
 	case sf::Event::KeyPressed:
 		Logger::log(Logger::LogLevel::DEBUG,
 			"Handling 'KeyPressed' event");
@@ -68,6 +69,7 @@ void WindowApplication::baseHandle(const sf::Event& event)
 		{
 			widget->handleKeyPress(event.key);
 		}
+		break;
 	case sf::Event::Closed:
 		Logger::log(Logger::LogLevel::DEBUG,
 			"Handling 'Closed' event");

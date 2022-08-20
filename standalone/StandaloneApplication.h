@@ -11,6 +11,7 @@ public:
 	constexpr static int DEFAULT_BOTTOM_LOOT_PANE_HEIGHT = 120;
 
 	StandaloneApplication();
+
 	void handle(const sf::Event& event) override;
 };
 

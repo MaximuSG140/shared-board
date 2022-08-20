@@ -34,6 +34,7 @@ void FileExplorer::loadElements()
 		auto element = FACTORY.getElement(file);
 		element->setSize({ size().x,
 			ELEMENT_HEIGHT });
+		directory_elements_.push_back(std::move(element));
 	}
 }
 
@@ -53,6 +54,10 @@ void FileExplorer::onClick(const sf::Vector2i click_position)
 	auto relative_position = click_position - position();
 	int number_on_display = relative_position.y / ELEMENT_HEIGHT;
 	int chosen_file_number = number_on_display + first_displayed_element_number_;
+	if(chosen_file_number >= directory_elements_.size())
+	{
+		return;
+	}
 	auto chosen_file_path = current_directory_ / directory_elements_[chosen_file_number]->fileName();
 	fs::directory_entry chosen_file_info(chosen_file_path);
 	if(chosen_file_info.is_directory())
@@ -83,9 +88,10 @@ void FileExplorer::draw(sf::RenderTarget& target,
 	for(int i = 0; i < std::min<int>(elements_fit, 
 		directory_elements_.size() - first_displayed_element_number_); ++i)
 	{
-		directory_elements_[first_displayed_element_number_ + i]->setPosition(body_position + sf::Vector2i{ 0, i * ELEMENT_HEIGHT });
-		directory_elements_[first_displayed_element_number_ + i]->setSize({body_size.x,
-			ELEMENT_HEIGHT});
+		directory_elements_[first_displayed_element_number_ + i]->
+			setPosition(body_position + sf::Vector2i{ 0, static_cast<int>(i * ELEMENT_HEIGHT) });
+		directory_elements_[first_displayed_element_number_ + i]->
+			setSize({body_size.x, ELEMENT_HEIGHT});
 		target.draw(*directory_elements_[first_displayed_element_number_ + i],
 			states);
 	}
