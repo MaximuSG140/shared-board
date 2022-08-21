@@ -81,7 +81,7 @@ void WindowApplication::baseHandle(const sf::Event& event)
 		{
 			Logger::log(Logger::LogLevel::DEBUG,
 			"Handling 'Resized' event");
-			auto old_size = main_window_.getSize();
+			auto old_size = cached_window_size_;
 			sf::Vector2u new_size{ event.size.width,
 				event.size.height };
 			main_window_.setSize({ event.size.width,
@@ -92,48 +92,62 @@ void WindowApplication::baseHandle(const sf::Event& event)
 			{
 				widget->scale(proportions);
 			}
+			cached_window_size_ = new_size;
 			break;
 		}
 	case sf::Event::MouseButtonPressed:
-		Logger::log(Logger::LogLevel::DEBUG,
+		{
+			Logger::log(Logger::LogLevel::DEBUG,
 			"Handling 'MouseButtonPressed' event");
-		for(auto widget : clickable_widgets_)
-		{
-			widget->startClick({ event.mouseButton.x,
-				event.mouseButton.y });
-		}
-		for(auto widget : selectable_widgets_)
-		{
-			widget->interact({ event.mouseButton.x,
-				event.mouseButton.y });
-		}
-		for (auto widget : holdable_widgets_)
-		{
-			widget->startHolding({ event.mouseButton.x,
-				event.mouseButton.y });
+			auto click_coordinates = main_window_.mapPixelToCoords({ event.mouseButton.x,
+					event.mouseButton.y });
+			for(auto widget : clickable_widgets_)
+			{
+				widget->startClick({static_cast<int>(click_coordinates.x),
+					static_cast<int>(click_coordinates.y)});
+			}
+			for(auto widget : selectable_widgets_)
+			{
+				widget->interact({ static_cast<int>(click_coordinates.x),
+					static_cast<int>(click_coordinates.y) });
+			}
+			for (auto widget : holdable_widgets_)
+			{
+				widget->startHolding({ static_cast<int>(click_coordinates.x),
+					static_cast<int>(click_coordinates.y) });
+			}
 		}
 		break;
 	case sf::Event::MouseButtonReleased:
-		Logger::log(Logger::LogLevel::DEBUG,
-			"Handling 'MouseButtonReleased' event");
-		for (auto widget : clickable_widgets_)
 		{
-			widget->endClick({ event.mouseButton.x,
+			auto click_coordinates = main_window_.mapPixelToCoords({ event.mouseButton.x,
 				event.mouseButton.y });
-		}
-		for(auto widget : holdable_widgets_)
-		{
-			widget->endHolding({event.mouseButton.x,
-				event.mouseButton.y});
+			Logger::log(Logger::LogLevel::DEBUG,
+			"Handling 'MouseButtonReleased' event");
+			for (auto widget : clickable_widgets_)
+			{
+				widget->endClick({ static_cast<int>(click_coordinates.x),
+					static_cast<int>(click_coordinates.y) });
+			}
+			for(auto widget : holdable_widgets_)
+			{
+				widget->endHolding({ static_cast<int>(click_coordinates.x),
+					static_cast<int>(click_coordinates.y) });
+			}
 		}
 		break;
 	case sf::Event::MouseMoved:
-		Logger::log(Logger::LogLevel::DEBUG,
-			"Handling 'MouseMoved' event");
-		for(auto widget : holdable_widgets_)
 		{
-			widget->proceedHolding({ event.mouseMove.x,
+			Logger::log(Logger::LogLevel::DEBUG,
+			"Handling 'MouseMoved' event");
+
+			auto click_coordinates = main_window_.mapPixelToCoords({ event.mouseMove.x,
 				event.mouseMove.y });
+			for(auto widget : holdable_widgets_)
+			{
+				widget->proceedHolding({ static_cast<int>(click_coordinates.x),
+					static_cast<int>(click_coordinates.y) });
+			}
 		}
 		break;
 	default:
