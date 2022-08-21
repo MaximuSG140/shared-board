@@ -11,12 +11,12 @@ class FileExplorer final :
 {
 public:
     static constexpr unsigned ELEMENT_HEIGHT = 50;
-    inline static const sf::Color BODY_COLOR = { 240,
-	    240,
-	    240 };
-    inline static const sf::Color OUTLINE_COLOR = { 230,
+    inline static const sf::Color BODY_COLOR = { 230,
 	    230,
 	    230 };
+    inline static const sf::Color OUTLINE_COLOR = { 225,
+	    225,
+	    225 };
     static constexpr int OUTLINE_THICKNESS = 3;
 
     explicit FileExplorer(const std::string& name,

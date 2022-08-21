@@ -21,16 +21,18 @@ void RegularFileElement::draw(sf::RenderTarget& target,
 	float scale_proportion = size().y / icon_sprite.getLocalBounds().height;
 	icon_sprite.scale(scale_proportion,
 		scale_proportion);
+	icon_sprite.setPosition({ static_cast<float>(position().x),
+		static_cast<float>(position().y) });
 	target.draw(icon_sprite,
 		states);
-	sf::Text directory_name = generateTruncatedText(file_name_,
+	sf::Text file_name = generateTruncatedText(file_name_,
 		GetDefaultFont(),
-		size().y,
-		size().x - icon_sprite.getLocalBounds().width);
-	directory_name.setPosition(static_cast<float>(position().x) + icon_sprite.getGlobalBounds().width,
+		size().y / 2,
+		size().x - icon_sprite.getGlobalBounds().width);
+	file_name.setPosition(static_cast<float>(position().x) + icon_sprite.getGlobalBounds().width,
 		static_cast<float>(position().y));
-	directory_name.setFillColor(sf::Color::Black);
-	target.draw(directory_name,
+	file_name.setFillColor(sf::Color::Black);
+	target.draw(file_name,
 		states);
 }
 
@@ -41,15 +43,14 @@ sf::Text RegularFileElement::generateTruncatedText(const std::string& text,
 {
 	unsigned size_left = 0;
 	unsigned size_right = text.length();
-	while(size_right - size_left > 1)
+	while (size_right - size_left > 1)
 	{
 		unsigned size_current = (size_right + size_left) / 2;
-		sf::String sf_representation(text.substr(0,
-			size_current));
-		if(sf::Text printable_text(sf_representation,
-		                           font,
-		                           character_size);
-			printable_text.getLocalBounds().width < desired_size)
+		if (sf::Text printable_text(text.substr(0,
+				size_current),
+			font,
+			character_size);
+			printable_text.getLocalBounds().width < static_cast<float>(desired_size))
 		{
 			size_left = size_current;
 		}
@@ -59,7 +60,7 @@ sf::Text RegularFileElement::generateTruncatedText(const std::string& text,
 		}
 	}
 	return sf::Text(text.substr(0,
-		size_left),
+			size_right),
 		font,
 		character_size);
 }

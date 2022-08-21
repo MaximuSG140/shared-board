@@ -48,7 +48,7 @@ void FileExplorer::scroll(const int ticks)
 	first_displayed_element_number_ -= ticks;
 	first_displayed_element_number_ = std::max(first_displayed_element_number_,
 		0);
-	int elements_fit = size().y / ELEMENT_HEIGHT;
+	int elements_fit = static_cast<int>(size().y / ELEMENT_HEIGHT);
 	first_displayed_element_number_ = std::min<int>(first_displayed_element_number_,
 		static_cast<int>(directory_elements_.size()) - elements_fit);
 	first_displayed_element_number_ = std::max<int>(0,
@@ -59,15 +59,15 @@ void FileExplorer::onClick(const sf::Vector2i click_position)
 {
 	namespace fs = std::filesystem;
 	auto relative_position = click_position - position();
-	int number_on_display = relative_position.y / ELEMENT_HEIGHT;
+	int number_on_display = static_cast<int>(relative_position.y / ELEMENT_HEIGHT);
 	int chosen_file_number = number_on_display + first_displayed_element_number_;
-	if(chosen_file_number >= directory_elements_.size())
+	if(chosen_file_number >= static_cast<int>(directory_elements_.size()))
 	{
 		return;
 	}
 	auto chosen_file_path = current_directory_ / directory_elements_[chosen_file_number]->fileName();
-	fs::directory_entry chosen_file_info(chosen_file_path);
-	if(chosen_file_info.is_directory())
+	if(fs::directory_entry chosen_file_info(chosen_file_path);
+		chosen_file_info.is_directory())
 	{
 		current_directory_ = chosen_file_path;
 		loadElements();
@@ -83,17 +83,18 @@ void FileExplorer::draw(sf::RenderTarget& target,
 {
 	auto body_size = size();
 	auto body_position = position();
-	sf::RectangleShape body({static_cast<float>(body_size.x),
+	sf::RectangleShape body({ static_cast<float>(body_size.x),
 		static_cast<float>(body_size.y)});
 	body.setPosition({ static_cast<float>(body_position.x),
 		static_cast<float>(body_position.y) });
 	body.setFillColor(BODY_COLOR);
 	body.setOutlineThickness(OUTLINE_THICKNESS);
 	body.setOutlineColor(OUTLINE_COLOR);
-	target.draw(body, states);
-	int elements_fit = body_size.y / ELEMENT_HEIGHT;
-	for(int i = 0; i < std::min<int>(elements_fit, 
-		directory_elements_.size() - first_displayed_element_number_); ++i)
+	target.draw(body,
+		states);
+	int elements_fit = static_cast<int>(body_size.y / ELEMENT_HEIGHT);
+	for(int i = 0; i < std::min<int>(elements_fit,
+		static_cast<int>(directory_elements_.size()) - first_displayed_element_number_); ++i)
 	{
 		directory_elements_[first_displayed_element_number_ + i]->
 			setPosition(body_position + sf::Vector2i{ 0, static_cast<int>(i * ELEMENT_HEIGHT) });
@@ -102,5 +103,6 @@ void FileExplorer::draw(sf::RenderTarget& target,
 		target.draw(*directory_elements_[first_displayed_element_number_ + i],
 			states);
 	}
-	RectangleWidget::draw(target, states);
+	RectangleWidget::draw(target,
+		states);
 }

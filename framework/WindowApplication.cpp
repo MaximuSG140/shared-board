@@ -57,9 +57,11 @@ void WindowApplication::baseHandle(const sf::Event& event)
 	case sf::Event::MouseWheelScrolled:
 		Logger::log(Logger::LogLevel::DEBUG,
 			"Handling 'MouseWheelScrolled' event");
+		Logger::log(Logger::LogLevel::DEBUG,
+			"Ticks value: " + std::to_string(event.mouseWheelScroll.delta));
 		for(auto widget : scrollable_widgets_)
 		{
-			widget->scroll(event.mouseWheel.delta);
+			widget->scroll(event.mouseWheelScroll.delta);
 		}
 		break;
 	case sf::Event::KeyPressed:
