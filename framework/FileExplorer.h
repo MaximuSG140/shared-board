@@ -23,7 +23,7 @@ public:
                           sf::Vector2i position,
                           sf::Vector2u size,
                           std::filesystem::path start_directory = std::filesystem::current_path());
-    std::filesystem::path chosenFile()const;
+    std::optional<std::filesystem::path> chosenFile() const;
 
     [[nodiscard]] bool containsCursor(sf::Vector2i cursor_point) const override;
     void scroll(int ticks) override;
@@ -35,7 +35,7 @@ private:
     void loadElements();
 
     std::filesystem::path current_directory_;
-    std::filesystem::path chosen_file_;
+    std::optional<std::filesystem::path> chosen_file_;
     inline constexpr static DirectoryElementFactory FACTORY{};
     std::vector<std::unique_ptr<IFileExplorerElement>> directory_elements_;
     int first_displayed_element_number_ = 0;

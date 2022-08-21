@@ -27,9 +27,20 @@ StandaloneApplication::StandaloneApplication()
 	{
 		canvas->selectBrush(10);
 	});
-	addWidget<FileExplorer>("Dialog",
-		sf::Vector2i{ 0, 510 },
+	auto explorer = addWidget<FileExplorer>("Dialog",
+		sf::Vector2i{ 0, 520 },
 		sf::Vector2u{ 400, 300 });
+	addWidget<SimpleButton>("Load",
+		sf::Vector2i{ 410, 520 },
+		sf::Vector2u{ 100, 100 },
+		[=]()
+	{
+		if (auto file_name = explorer->chosenFile();
+			file_name.has_value())
+		{
+			canvas->loadImage(file_name.value());
+		}
+	});
 }
 
 void StandaloneApplication::handle(const sf::Event& event)

@@ -15,7 +15,7 @@ FileExplorer::FileExplorer(const std::string& name,
 	loadElements();
 }
 
-std::filesystem::path FileExplorer::chosenFile() const
+std::optional<std::filesystem::path> FileExplorer::chosenFile() const
 {
 	return chosen_file_;
 }

@@ -57,7 +57,8 @@ void Canvas::draw(sf::RenderTarget& target,
 		static_cast<float>(canvas_position.y));
 	target.draw(body);
 	target.draw(sprite);
-	Widget::draw(target, states);
+	Widget::draw(target,
+		states);
 }
 
 void Canvas::onClick(const sf::Vector2i mouse_position)
