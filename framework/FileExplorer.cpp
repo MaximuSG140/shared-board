@@ -74,6 +74,11 @@ void FileExplorer::onClick(const sf::Vector2i click_position)
 	}
 	else
 	{
+		for(auto& element : directory_elements_)
+		{
+			element->unChoose();
+		}
+		directory_elements_[chosen_file_number]->choose();
 		chosen_file_ = chosen_file_path;
 	}
 }

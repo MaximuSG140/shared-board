@@ -3,6 +3,8 @@
 
 #include "Resources.h"
 
+#include "FileExplorer.h"
+
 RegularFileElement::RegularFileElement(std::string file_name,
                                        const long long file_size)
 	: file_name_(std::move(file_name)),
@@ -34,6 +36,18 @@ void RegularFileElement::draw(sf::RenderTarget& target,
 	file_name.setFillColor(sf::Color::Black);
 	target.draw(file_name,
 		states);
+	if(chosen())
+	{
+		sf::RectangleShape body({ static_cast<float>(size().x),
+			static_cast<float>(size().y)});
+		body.setPosition({ static_cast<float>(position().x),
+			static_cast<float>(position().y) });
+		body.setFillColor(sf::Color::Transparent);
+		body.setOutlineThickness(FileExplorer::OUTLINE_THICKNESS);
+		body.setOutlineColor(sf::Color::Cyan);
+		target.draw(body,
+			states);
+	}
 }
 
 sf::Text RegularFileElement::generateTruncatedText(const std::string& text,

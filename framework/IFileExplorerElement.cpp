@@ -11,6 +11,21 @@ sf::Vector2u IFileExplorerElement::size() const
 	return size_;
 }
 
+void IFileExplorerElement::choose()
+{
+	chosen_ = true;
+}
+
+void IFileExplorerElement::unChoose()
+{
+	chosen_ = false;
+}
+
+bool IFileExplorerElement::chosen() const
+{
+	return chosen_;
+}
+
 void IFileExplorerElement::setPosition(const sf::Vector2i position)
 {
 	position_ = position;

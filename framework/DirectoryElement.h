@@ -9,7 +9,7 @@ public:
 
 	explicit DirectoryElement(std::string directory_name);
 
-	std::string fileName() const override;
+	[[nodiscard]] std::string fileName() const override;
 protected:
     void draw(sf::RenderTarget& target,
         sf::RenderStates states) const override;
