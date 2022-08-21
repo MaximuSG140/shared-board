@@ -46,6 +46,13 @@ bool FileExplorer::containsCursor(const sf::Vector2i cursor_point) const
 void FileExplorer::scroll(const int ticks)
 {
 	first_displayed_element_number_ -= ticks;
+	first_displayed_element_number_ = std::max(first_displayed_element_number_,
+		0);
+	int elements_fit = size().y / ELEMENT_HEIGHT;
+	first_displayed_element_number_ = std::min<int>(first_displayed_element_number_,
+		static_cast<int>(directory_elements_.size()) - elements_fit);
+	first_displayed_element_number_ = std::max<int>(0,
+		first_displayed_element_number_);
 }
 
 void FileExplorer::onClick(const sf::Vector2i click_position)
