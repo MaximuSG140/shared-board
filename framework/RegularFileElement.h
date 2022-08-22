@@ -12,7 +12,8 @@ public:
 
 	[[nodiscard]] std::string fileName() const override;
 protected:
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+	void draw(sf::RenderTarget& target,
+		sf::RenderStates states) const override;
 private:
 	static sf::Text generateTruncatedText(const std::string& text,
 		const sf::Font& font,
