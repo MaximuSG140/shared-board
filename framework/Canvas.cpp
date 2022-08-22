@@ -51,7 +51,11 @@ void Canvas::draw(sf::RenderTarget& target,
 		static_cast<float>(canvas_position.y)});
 	auto image = redactor_.getImageCopy();
 	sf::Texture texture;
-	texture.loadFromImage(image);
+	texture.loadFromImage(image,
+		sf::IntRect{ 0,
+			0,
+			static_cast<int>(canvas_size.x),
+			static_cast<int>(canvas_size.y) });
 	sf::Sprite sprite(texture);
 	sprite.setPosition(static_cast<float>(canvas_position.x),
 		static_cast<float>(canvas_position.y));
