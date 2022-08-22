@@ -28,6 +28,8 @@ void FileExplorer::loadElements()
 	directory_elements_.back()->setSize({ size().x,
 			ELEMENT_HEIGHT });
 
+	first_displayed_element_number_ = 0;
+
 	fs::directory_iterator directory_files(current_directory_);
 	for (const auto& file : directory_files)
 	{
