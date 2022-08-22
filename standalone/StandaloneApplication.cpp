@@ -1,6 +1,7 @@
 #include "StandaloneApplication.h"
 
 #include "framework/Canvas.h"
+#include "framework/FileDialog.h"
 #include "framework/FileExplorer.h"
 #include "framework/SimpleButton.h"
 
@@ -27,18 +28,17 @@ StandaloneApplication::StandaloneApplication()
 	{
 		canvas->selectBrush(10);
 	});
-	auto explorer = addWidget<FileExplorer>("Dialog",
-		sf::Vector2i{ 0, 520 },
-		sf::Vector2u{ 400, 300 });
 	addWidget<SimpleButton>("Load",
 		sf::Vector2i{ 410, 520 },
 		sf::Vector2u{ 100, 100 },
 		[=]()
 	{
-		if (auto file_name = explorer->chosenFile();
-			file_name.has_value())
+		FileDialog dialog;
+		dialog.run();
+		if (auto file = dialog.chosenFile();
+			file.has_value())
 		{
-			canvas->loadImage(file_name.value());
+			canvas->loadImage(file.value());
 		}
 	});
 }
