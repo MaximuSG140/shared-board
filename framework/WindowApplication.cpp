@@ -33,6 +33,11 @@ sf::Vector2u WindowApplication::windowSize() const
 	return main_window_.getSize();
 }
 
+void WindowApplication::close()
+{
+	main_window_.close();
+}
+
 void WindowApplication::render()
 {
 	Logger::log(Logger::LogLevel::INFO,

@@ -20,6 +20,8 @@ public:
     void setWindowSize(sf::Vector2u size);
     sf::Vector2u windowSize()const;
 
+    void close();
+
 	template<typename WidgetType, typename... ConstructorArgs>
 	WidgetType* addWidget(ConstructorArgs&&... widget_parameters);
 protected:
