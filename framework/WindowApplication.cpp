@@ -13,11 +13,7 @@ void WindowApplication::run()
 	while(main_window_.isOpen())
 	{
 		main_window_.waitEvent(received_event);
-		Logger::log(Logger::LogLevel::DEBUG,
-			"Event dispatched");
 		baseHandle(received_event);
-		Logger::log(Logger::LogLevel::DEBUG,
-			"Polling next event");
 	}
 	Logger::log(Logger::LogLevel::INFO,
 		"Application exited");
@@ -98,6 +94,10 @@ void WindowApplication::baseHandle(const sf::Event& event)
 				widget->scale(proportions);
 			}
 			cached_window_size_ = new_size;
+			main_window_.setView(sf::View(sf::FloatRect(0,
+				0,
+				event.size.width,
+				event.size.height)));
 			break;
 		}
 	case sf::Event::MouseButtonPressed:

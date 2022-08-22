@@ -12,6 +12,8 @@ class Canvas final :
     public RectangleWidget, public IMouseClickable, public IMouseHoldable
 {
 public:
+    constexpr static int OUTLINE_THICKNESS = 3;
+
     explicit Canvas(const std::string& name,
         sf::Vector2i position,
         sf::Vector2u size);

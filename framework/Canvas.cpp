@@ -44,7 +44,7 @@ void Canvas::draw(sf::RenderTarget& target,
 	auto canvas_position = position();
 	sf::RectangleShape body({static_cast<float>(canvas_size.x),
 		static_cast<float>(canvas_size.y)});
-	body.setOutlineThickness(3);
+	body.setOutlineThickness(OUTLINE_THICKNESS);
 	body.setOutlineColor(sf::Color::Black);
 	body.setFillColor(sf::Color::White);
 	body.setPosition({static_cast<float>(canvas_position.x),
