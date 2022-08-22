@@ -11,8 +11,8 @@ Canvas::Canvas(const std::string& name,
 	: RectangleWidget(name,
 		position,
 		size),
-	redactor_(size.x,
-		size.y)
+	redactor_(static_cast<int>(size.x),
+	          static_cast<int>(size.y))
 {}
 
 Canvas::Canvas(const sf::Vector2i position,
@@ -42,12 +42,12 @@ void Canvas::draw(sf::RenderTarget& target,
 {
 	auto canvas_size = size();
 	auto canvas_position = position();
-	sf::RectangleShape body({static_cast<float>(canvas_size.x),
+	sf::RectangleShape body({ static_cast<float>(canvas_size.x),
 		static_cast<float>(canvas_size.y)});
 	body.setOutlineThickness(OUTLINE_THICKNESS);
 	body.setOutlineColor(sf::Color::Black);
 	body.setFillColor(sf::Color::White);
-	body.setPosition({static_cast<float>(canvas_position.x),
+	body.setPosition({ static_cast<float>(canvas_position.x),
 		static_cast<float>(canvas_position.y)});
 	sf::Texture texture;
 	texture.loadFromImage(redactor_.image(),
@@ -56,7 +56,7 @@ void Canvas::draw(sf::RenderTarget& target,
 			static_cast<int>(canvas_size.x),
 			static_cast<int>(canvas_size.y) });
 	sf::Sprite sprite(texture);
-	sprite.setPosition(static_cast<float>(canvas_position.x),
+	sprite.setPosition( static_cast<float>(canvas_position.x),
 		static_cast<float>(canvas_position.y));
 	target.draw(body);
 	target.draw(sprite);
