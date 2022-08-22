@@ -49,9 +49,8 @@ void Canvas::draw(sf::RenderTarget& target,
 	body.setFillColor(sf::Color::White);
 	body.setPosition({static_cast<float>(canvas_position.x),
 		static_cast<float>(canvas_position.y)});
-	auto image = redactor_.getImageCopy();
 	sf::Texture texture;
-	texture.loadFromImage(image,
+	texture.loadFromImage(redactor_.image(),
 		sf::IntRect{ 0,
 			0,
 			static_cast<int>(canvas_size.x),

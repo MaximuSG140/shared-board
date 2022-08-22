@@ -30,6 +30,16 @@ sf::Image ImageRedactor::getImageCopy() const
 	return *image_;
 }
 
+sf::Image& ImageRedactor::image()
+{
+	return *image_;
+}
+
+const sf::Image& ImageRedactor::image() const
+{
+	return *image_;
+}
+
 std::unique_ptr<sf::Image> ImageRedactor::acquireImage()
 {
 	auto default_image = std::make_unique<sf::Image>();

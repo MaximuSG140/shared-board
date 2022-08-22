@@ -14,6 +14,8 @@ public:
 	void loadImage(std::unique_ptr<sf::Image> image);
 
 	sf::Image getImageCopy()const;
+	sf::Image& image();
+	const sf::Image& image()const;
 	std::unique_ptr<sf::Image> acquireImage();
 
 	void drawPoint(sf::Vector2i position,
