@@ -20,6 +20,8 @@ public:
     void setWindowSize(sf::Vector2u size);
     sf::Vector2u windowSize()const;
 
+    void close();
+
 	template<typename WidgetType, typename... ConstructorArgs>
 	WidgetType* addWidget(ConstructorArgs&&... widget_parameters);
 protected:
@@ -29,6 +31,9 @@ private:
     void baseHandle(const sf::Event& event);
 
     sf::RenderWindow main_window_;
+
+    sf::Vector2u cached_window_size_;
+
     std::vector<std::unique_ptr<Widget>> widgets_;
     std::vector<IMouseClickable*> clickable_widgets_;
     std::vector<IMouseHoldable*> holdable_widgets_;
@@ -39,7 +44,8 @@ private:
 
 template <typename... T>
 WindowApplication::WindowApplication(T&&... window_parameters)
-	: main_window_(std::forward<T>(window_parameters)...)
+	: main_window_(std::forward<T>(window_parameters)...),
+	cached_window_size_(main_window_.getSize())
 {}
 
 template <typename WidgetType, typename... ConstructorArgs>
