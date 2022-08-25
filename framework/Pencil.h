@@ -10,9 +10,11 @@ public:
 	explicit Pencil(int thickness,
 		const sf::Color& color);
 
-	void hold(ImageRedactor& redactor, sf::Vector2i position) override;
+	void hold(ImageRedactor& redactor,
+		sf::Vector2i position) override;
 	void unHold(ImageRedactor& redactor) override;
-	void click(ImageRedactor& redactor, sf::Vector2i position) override;
+	void click(ImageRedactor& redactor,
+		sf::Vector2i position) override;
 private:
 	bool first_point_ = true;
 	sf::Vector2i previous_point_;
