@@ -30,6 +30,16 @@ sf::Image ImageRedactor::getImageCopy() const
 	return *image_;
 }
 
+sf::Image& ImageRedactor::image()
+{
+	return *image_;
+}
+
+const sf::Image& ImageRedactor::image() const
+{
+	return *image_;
+}
+
 std::unique_ptr<sf::Image> ImageRedactor::acquireImage()
 {
 	auto default_image = std::make_unique<sf::Image>();
@@ -99,12 +109,15 @@ void ImageRedactor::drawSmoothPoint(const sf::Vector2i position,
 	{
 		for (int y = upper_bound; y < bottom_bound; ++y)
 		{
-			auto distance = CalculateEuclideanDistance(position, { x, y });
-			if (distance < thickness)
+			if (auto distance = CalculateEuclideanDistance(position,
+			                                               { x, y });
+				distance < thickness)
 			{
 				auto muted_color = color;
 				muted_color.a = static_cast<sf::Uint8>(color.a * (1 - distance / thickness));
-				image_->setPixel(x, y, muted_color);
+				image_->setPixel(x,
+					y,
+					muted_color);
 			}
 		}
 	}
@@ -153,9 +166,12 @@ void ImageRedactor::drawSmoothPixel(const int x,
 			static_cast<int>(new_component) * result_color.a * current_color.a / MAXIMAL_ALPHA_VALUE +
 			static_cast<int>(new_component) * result_color.a) / MAXIMAL_ALPHA_VALUE);
 	};
-	result_color.r = calculate_color_component(color.r, current_color.r);
-	result_color.g = calculate_color_component(color.g, current_color.g);
-	result_color.b = calculate_color_component(color.b, current_color.b);
+	result_color.r = calculate_color_component(color.r,
+		current_color.r);
+	result_color.g = calculate_color_component(color.g,
+		current_color.g);
+	result_color.b = calculate_color_component(color.b,
+		current_color.b);
 	image_->setPixel(x,
 		y,
 		result_color);

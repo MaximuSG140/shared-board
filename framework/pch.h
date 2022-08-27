@@ -9,3 +9,4 @@
 #include <string>
 #include <memory>
 #include <filesystem>
+#include <optional>

@@ -1,4 +1,5 @@
 #pragma once
+#include "framework/Canvas.h"
 #include "framework/WindowApplication.h"
 
 class StandaloneApplication final
@@ -11,6 +12,7 @@ public:
 	constexpr static int DEFAULT_BOTTOM_LOOT_PANE_HEIGHT = 120;
 
 	StandaloneApplication();
+
 	void handle(const sf::Event& event) override;
 };
 

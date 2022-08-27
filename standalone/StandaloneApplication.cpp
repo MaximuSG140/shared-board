@@ -1,14 +1,16 @@
 #include "StandaloneApplication.h"
 
 #include "framework/Canvas.h"
+#include "framework/FileDialog.h"
+#include "framework/FileExplorer.h"
 #include "framework/SimpleButton.h"
 
 StandaloneApplication::StandaloneApplication()
-	: WindowApplication(sf::VideoMode(1280,
-		840),
-		"Drawer")
+	: WindowApplication(sf::VideoMode(DEFAULT_WINDOW_WIDTH,
+		DEFAULT_WINDOW_HEIGHT),
+		"Drawer")	
 {
-	auto canvas = addWidget<Canvas>("Main",
+	auto drawing_canvas = addWidget<Canvas>("Main",
 		sf::Vector2i{ 10, 10 },
 		sf::Vector2u{ 900, 500 });
 
@@ -17,16 +19,31 @@ StandaloneApplication::StandaloneApplication()
 		sf::Vector2u{ 100, 100 },
 		[=]()
 	{
-		canvas->selectPencil(10);
+		drawing_canvas->selectPencil(10);
 	});
 	addWidget<SimpleButton>("Brush",
 		sf::Vector2i{ 910, 110 },
 		sf::Vector2u{ 100, 100 },
 		[=]()
 	{
-		canvas->selectBrush(10);
+		drawing_canvas->selectBrush(10);
+	});
+	addWidget<SimpleButton>("Load",
+		sf::Vector2i{ 410, 520 },
+		sf::Vector2u{ 100, 100 },
+		[=]()
+	{
+		FileDialog dialog;
+		dialog.run();
+		if (auto file = dialog.chosenFile();
+			file.has_value())
+		{
+			drawing_canvas->loadImage(file.value());
+		}
 	});
 }
 
 void StandaloneApplication::handle(const sf::Event& event)
-{}
+{
+	
+}

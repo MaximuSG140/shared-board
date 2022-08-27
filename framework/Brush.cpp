@@ -19,8 +19,8 @@ void Brush::hold(ImageRedactor& redactor,
 			color_);
 	}
 	redactor.drawSmoothPoint(position,
-		thickness_,
-		color_);
+	                         thickness_,
+	                         color_);
 	previous_point_ = position;
 	first_point_ = false;
 }
