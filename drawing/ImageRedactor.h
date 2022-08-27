@@ -2,7 +2,6 @@
 #include "pch.h"
 
 #include "Geometry.h"
-#include <cmath>
 
 class ImageRedactor
 {
@@ -75,7 +74,8 @@ void ImageRedactor::drawSegment(sf::Vector2i first,
 	auto angle_from_horizon = CalculateAngle(direction,
 		{ 1, 0 });
 
-	if(angle_from_horizon > PI_VALUE / 4 && angle_from_horizon < PI_VALUE * 3 / 4)
+	if(angle_from_horizon > PI_VALUE / 4 &&
+		angle_from_horizon < PI_VALUE * 3 / 4)
 	{
 		drawNearVerticalSegment(first,
 			second,
@@ -102,10 +102,11 @@ void ImageRedactor::drawNearVerticalSegment(sf::Vector2i start,
 			end);
 	}
 	auto horizontal_shift = end.x - start.x;
-	auto shift_per_pixel = horizontal_shift / static_cast<float>(end.y - start.y);
+	auto shift_per_pixel = static_cast<float>(horizontal_shift) / static_cast<float>(end.y - start.y);
 	for (int y = start.y; y <= end.y; ++y)
 	{
-		draw_point(static_cast<int>(start.x + 0.5f + (y - start.y) * shift_per_pixel),
+		draw_point(static_cast<int>(static_cast<float>(start.x) + 0.5f +
+				static_cast<float>(y - start.y) * shift_per_pixel),
 			y);
 	}
 }
@@ -121,10 +122,11 @@ void ImageRedactor::drawNearHorizontalSegment(sf::Vector2i start,
 			end);
 	}
 	auto vertical_shift = end.y - start.y;
-	auto shift_per_pixel = vertical_shift / static_cast<float>(end.x - start.x);
+	auto shift_per_pixel = static_cast<float>(vertical_shift) / static_cast<float>(end.x - start.x);
 	for (int x = start.x; x <= end.x; ++x)
 	{
 		draw_point(x,
-			static_cast<int>(start.y + 0.5f + (x - start.x) * shift_per_pixel));
+			static_cast<int>(static_cast<float>(start.y) + 0.5f + 
+				static_cast<float>(x - start.x) * shift_per_pixel));
 	}
 }
