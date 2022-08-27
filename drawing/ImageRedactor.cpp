@@ -48,7 +48,7 @@ std::unique_ptr<sf::Image> ImageRedactor::acquireImage()
 }
 
 void ImageRedactor::drawPoint(const sf::Vector2i position,
-                              const sf::Color& color) const
+                              const sf::Color& color)
 {
 	if(!isValidPoint(position))
 	{
@@ -61,7 +61,7 @@ void ImageRedactor::drawPoint(const sf::Vector2i position,
 
 void ImageRedactor::drawPoint(const sf::Vector2i position,
                               const int thickness,
-                              const sf::Color& color) const
+                              const sf::Color& color)
 {
 	if (!isValidPoint(position))
 	{
@@ -90,7 +90,7 @@ void ImageRedactor::drawPoint(const sf::Vector2i position,
 
 void ImageRedactor::drawSmoothPoint(const sf::Vector2i position,
                                     const int thickness,
-                                    const sf::Color& color) const
+                                    const sf::Color& color)
 {
 	if(!isValidPoint(position))
 	{
@@ -151,7 +151,7 @@ bool ImageRedactor::isValidPoint(const sf::Vector2i point) const
 
 void ImageRedactor::drawSmoothPixel(const int x,
                                     const int y,
-                                    const sf::Color& color) const
+                                    const sf::Color& color)
 {
 	auto current_color = image_->getPixel(x,
 		y);
