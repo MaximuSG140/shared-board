@@ -109,9 +109,9 @@ void ImageRedactor::drawSmoothPoint(const sf::Vector2i position,
 	{
 		for (int y = upper_bound; y < bottom_bound; ++y)
 		{
-			auto distance = CalculateEuclideanDistance(position,
-				{ x, y });
-			if (distance < thickness)
+			if (auto distance = CalculateEuclideanDistance(position,
+			                                               { x, y });
+				distance < thickness)
 			{
 				auto muted_color = color;
 				muted_color.a = static_cast<sf::Uint8>(color.a * (1 - distance / thickness));

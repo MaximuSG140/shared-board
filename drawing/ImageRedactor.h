@@ -1,6 +1,8 @@
 #pragma once
 #include "pch.h"
 
+#include "Geometry.h"
+
 class ImageRedactor
 {
 public:
@@ -13,9 +15,9 @@ public:
 	void loadImage(const std::string& file_name) const;
 	void loadImage(std::unique_ptr<sf::Image> image);
 
-	sf::Image getImageCopy()const;
+	[[nodiscard]] sf::Image getImageCopy()const;
 	sf::Image& image();
-	const sf::Image& image()const;
+	[[nodiscard]] const sf::Image& image() const;
 	std::unique_ptr<sf::Image> acquireImage();
 
 	void drawPoint(sf::Vector2i position,
@@ -41,10 +43,16 @@ public:
 	
 private:
 	template<typename DrawPointT>
-	void drawVerticalSegment(sf::Vector2i start,
+	void drawNearVerticalSegment(sf::Vector2i start,
 	                         sf::Vector2i end,
 	                         const DrawPointT& draw_point);
-	bool isValidPoint(sf::Vector2i point)const;
+	template<typename DrawPointT>
+	void drawNearHorizontalSegment(sf::Vector2i start,
+		sf::Vector2i end,
+		const DrawPointT& draw_point);
+
+
+	[[nodiscard]] bool isValidPoint(sf::Vector2i point)const;
 	void drawSmoothPixel(int x,
 	                     int y,
 	                     const sf::Color& color);
@@ -61,37 +69,64 @@ void ImageRedactor::drawSegment(sf::Vector2i first,
 	{
 		throw std::out_of_range("Attempt to draw pixel out of image bounds");
 	}
-	if (first.x == second.x)
+
+	auto direction = second - first;
+	auto angle_from_horizon = CalculateAngle(direction,
+		{ 1, 0 });
+
+	if(angle_from_horizon > PI_VALUE / 4 &&
+		angle_from_horizon < PI_VALUE * 3 / 4)
 	{
-		drawVerticalSegment(first,
+		drawNearVerticalSegment(first,
 			second,
 			draw_point);
-		return;
 	}
-	if (first.x > second.x)
+	else
 	{
-		std::swap(first, second);
+		drawNearHorizontalSegment(first,
+			second,
+			draw_point);
 	}
-	auto vertical_shift = second.y - first.y;
-	auto shift_per_pixel = vertical_shift / static_cast<float>(second.x - first.x);
-	for (int x = first.x; x <= second.x; ++x)
-	{
-		draw_point(x,
-			static_cast<int>(first.y + 0.5f + (x - first.x) * shift_per_pixel));
-	}
+
+	
 }
 
 template<typename DrawPointT>
-void ImageRedactor::drawVerticalSegment(const sf::Vector2i start,
-	const sf::Vector2i end,
+void ImageRedactor::drawNearVerticalSegment(sf::Vector2i start,
+	sf::Vector2i end,
 	const DrawPointT& draw_point)
 {
-	assert(start.x == end.x && "Segment should be vertical");
-	auto upper_point = std::min(start.y, end.y);
-	auto lower_point = std::max(start.y, end.y);
-	auto x_coordinate = start.x;
-	for (int i = upper_point; i <= lower_point; ++i)
+	if (start.y > end.y)
 	{
-		draw_point(x_coordinate, i);
+		std::swap(start,
+			end);
+	}
+	auto horizontal_shift = end.x - start.x;
+	auto shift_per_pixel = static_cast<float>(horizontal_shift) / static_cast<float>(end.y - start.y);
+	for (int y = start.y; y <= end.y; ++y)
+	{
+		draw_point(static_cast<int>(static_cast<float>(start.x) + 0.5f +
+				static_cast<float>(y - start.y) * shift_per_pixel),
+			y);
+	}
+}
+
+template <typename DrawPointT>
+void ImageRedactor::drawNearHorizontalSegment(sf::Vector2i start,
+	sf::Vector2i end,
+	const DrawPointT& draw_point)
+{
+	if (start.x > end.x)
+	{
+		std::swap(start,
+			end);
+	}
+	auto vertical_shift = end.y - start.y;
+	auto shift_per_pixel = static_cast<float>(vertical_shift) / static_cast<float>(end.x - start.x);
+	for (int x = start.x; x <= end.x; ++x)
+	{
+		draw_point(x,
+			static_cast<int>(static_cast<float>(start.y) + 0.5f + 
+				static_cast<float>(x - start.x) * shift_per_pixel));
 	}
 }
