@@ -1,4 +1,5 @@
 #pragma once
+#include "framework/Canvas.h"
 #include "framework/WindowApplication.h"
 
 class StandaloneApplication final
