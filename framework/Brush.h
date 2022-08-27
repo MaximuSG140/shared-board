@@ -1,18 +1,20 @@
 #pragma once
-#include "IDrawingTool.h"
+#include "ICanvasTool.h"
 
 
 class Brush final :
-    public IDrawingTool
+    public ICanvasTool
 {
 public:
 	Brush() = default;
 	explicit Brush(int thickness,
 		const sf::Color& color);
 
-	void hold(ImageRedactor& redactor, sf::Vector2i position) override;
+	void hold(ImageRedactor& redactor,
+		sf::Vector2i position) override;
 	void unHold(ImageRedactor& redactor) override;
-	void click(ImageRedactor& redactor, sf::Vector2i position) override;
+	void click(ImageRedactor& redactor,
+		sf::Vector2i position) override;
 private:
 	bool first_point_ = true;
 	sf::Vector2i previous_point_;

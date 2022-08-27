@@ -1,9 +1,9 @@
 #pragma once
-#include "IDrawingTool.h"
+#include "ICanvasTool.h"
 
 
 class Pencil final:
-    public IDrawingTool
+    public ICanvasTool
 {
 public:
 	Pencil() = default;

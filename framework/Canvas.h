@@ -1,7 +1,7 @@
 #pragma once
 #include "pch.h"
 
-#include "IDrawingTool.h"
+#include "ICanvasTool.h"
 #include "IMouseClickable.h"
 #include "IMouseHoldable.h"
 #include "RectangleWidget.h"
@@ -37,5 +37,5 @@ protected:
     void onHoldEnded() override;
 private:
     ImageRedactor redactor_;
-    std::unique_ptr<IDrawingTool> tool_;
+    std::unique_ptr<ICanvasTool> tool_;
 };
