@@ -1,15 +1,20 @@
 #include "pch.h"
 #include "Pencil.h"
 
-Pencil::Pencil(const int thickness,
+#include "Canvas.h"
+
+Pencil::Pencil(Canvas& owner,
+               const int thickness,
                const sf::Color& color)
-	: color_(color),
-	  thickness_(thickness)
+	: owner_(owner),
+	color_(color),
+	thickness_(thickness)
 {}
 
-void Pencil::hold(ImageRedactor& redactor,
-                  const sf::Vector2i position)
+void Pencil::hold(
+	const sf::Vector2i position)
 {
+	auto& redactor = owner_.redactor();
 	if (!first_point_)
 	{
 		redactor.drawSegment(previous_point_,
@@ -25,11 +30,11 @@ void Pencil::hold(ImageRedactor& redactor,
 	first_point_ = false;
 }
 
-void Pencil::unHold(ImageRedactor& redactor)
+void Pencil::unHold()
 {
 	first_point_ = true;
 }
 
-void Pencil::click(ImageRedactor& redactor,
-                   sf::Vector2i position)
+void Pencil::click(
+	sf::Vector2i position)
 {}

@@ -15,14 +15,14 @@ StandaloneApplication::StandaloneApplication()
 		sf::Vector2u{ 900, 500 });
 
 	addWidget<SimpleButton>("Pencil",
-		sf::Vector2i{ 910, 10 },
+		sf::Vector2i{ 920, 10 },
 		sf::Vector2u{ 100, 100 },
 		[=]()
 	{
 		drawing_canvas->selectPencil(10);
 	});
 	addWidget<SimpleButton>("Brush",
-		sf::Vector2i{ 910, 110 },
+		sf::Vector2i{ 920, 120 },
 		sf::Vector2u{ 100, 100 },
 		[=]()
 	{
@@ -41,6 +41,30 @@ StandaloneApplication::StandaloneApplication()
 			drawing_canvas->loadImage(file.value());
 		}
 	});
+
+	addWidget<SimpleButton>("Zoom",
+		sf::Vector2i{ 920, 230 },
+		sf::Vector2u{ 100, 100 },
+		[=]()
+		{
+			drawing_canvas->doubleScale();
+		});
+
+	addWidget<SimpleButton>("Shrink",
+		sf::Vector2i{ 920, 340 },
+		sf::Vector2u{ 100, 100 },
+		[=]()
+		{
+			drawing_canvas->lowerScale();
+		});
+
+	addWidget<SimpleButton>("Move",
+		sf::Vector2i{ 920, 450 },
+		sf::Vector2u{ 100, 100 },
+		[=]()
+		{
+			drawing_canvas->selectViewer();
+		});
 }
 
 void StandaloneApplication::handle(const sf::Event& event)

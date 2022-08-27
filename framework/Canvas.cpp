@@ -2,8 +2,11 @@
 #include "Canvas.h"
 
 #include "Brush.h"
+#include "CameraMoveTool.h"
 #include "Pencil.h"
 #include "logger/log.h"
+
+namespace fs = std::filesystem;
 
 Canvas::Canvas(const std::string& name,
                const sf::Vector2i position,
@@ -12,7 +15,8 @@ Canvas::Canvas(const std::string& name,
 		position,
 		size),
 	redactor_(static_cast<int>(size.x),
-	          static_cast<int>(size.y))
+	          static_cast<int>(size.y)),
+	camera_position_(position)
 {}
 
 Canvas::Canvas(const sf::Vector2i position,
@@ -27,16 +31,49 @@ Canvas::Canvas(const sf::Vector2i position,
 void Canvas::selectPencil(const int thickness,
                           const sf::Color& color)
 {
-	tool_ = std::make_unique<Pencil>(thickness,
+	tool_ = std::make_unique<Pencil>(*this,
+		thickness,
 		color);
 }
 
 void Canvas::selectBrush(const int thickness,
                          const sf::Color& color)
 {
-	tool_ = std::make_unique<Brush>(thickness,
+	tool_ = std::make_unique<Brush>(*this,
+		thickness,
 		color);
 }
+
+void Canvas::selectViewer()
+{
+	tool_ = std::make_unique<CameraMoveTool>(*this);
+}
+
+void Canvas::doubleScale()
+{
+	scale_modifier_ *= 2;
+}
+
+void Canvas::lowerScale()
+{
+	scale_modifier_ /= 2;
+}
+
+void Canvas::moveView(const sf::Vector2i delta)
+{
+	auto body_size = size();
+	auto image_size = redactor_.image().getSize();
+	camera_position_ += delta;
+	camera_position_.x = std::min(camera_position_.x,
+		static_cast<int>(image_size.x - body_size.x / scale_modifier_));
+	camera_position_.y = std::min(camera_position_.y,
+		static_cast<int>(image_size.y - body_size.y / scale_modifier_));
+	camera_position_.x = std::max(0,
+		camera_position_.x);
+	camera_position_.y = std::max(0,
+		camera_position_.y);
+}
+
 void Canvas::draw(sf::RenderTarget& target,
                   sf::RenderStates states) const
 {
@@ -50,12 +87,20 @@ void Canvas::draw(sf::RenderTarget& target,
 	body.setPosition({ static_cast<float>(canvas_position.x),
 		static_cast<float>(canvas_position.y)});
 	sf::Texture texture;
-	texture.loadFromImage(redactor_.image(),
-		sf::IntRect{ 0,
-			0,
-			static_cast<int>(canvas_size.x),
-			static_cast<int>(canvas_size.y) });
+	if(!texture.loadFromImage(redactor_.image(),
+			sf::IntRect{ camera_position_.x,
+				camera_position_.y,
+				static_cast<int>(canvas_size.x / scale_modifier_),
+				static_cast<int>(canvas_size.y / scale_modifier_) }))
+	{
+		Logger::log(Logger::LogLevel::FATAL,
+			"Error loading drawn image for rendering");
+		std::abort();
+	}
+	
 	sf::Sprite sprite(texture);
+	sprite.scale(scale_modifier_,
+		scale_modifier_);
 	sprite.setPosition( static_cast<float>(canvas_position.x),
 		static_cast<float>(canvas_position.y));
 	target.draw(body);
@@ -69,8 +114,7 @@ void Canvas::onClick(const sf::Vector2i mouse_position)
 	if(tool_)
 	{
 		auto relative_position = mouse_position - position();
-		tool_->click(redactor_,
-			relative_position);
+		tool_->click(relative_position);
 	}
 }
 
@@ -79,8 +123,7 @@ void Canvas::onHold(const sf::Vector2i mouse_position)
 	if(tool_)
 	{
 		auto relative_position = mouse_position - position();
-		tool_->hold(redactor_,
-			relative_position);
+		tool_->hold(relative_position);
 	}
 }
 
@@ -88,7 +131,7 @@ void Canvas::onHoldEnded()
 {
 	if(tool_)
 	{
-		tool_->unHold(redactor_);
+		tool_->unHold();
 	}
 }
 
@@ -97,12 +140,12 @@ bool Canvas::containsCursor(const sf::Vector2i cursor_point) const
 	return RectangleWidget::containsCursor(cursor_point);
 }
 
-void Canvas::loadImage(const std::filesystem::path& path_to_image) const
+void Canvas::loadImage(const fs::path& path_to_image) const
 {
 	redactor_.loadImage(path_to_image.string());
 }
 
-void Canvas::saveImage(const std::filesystem::path& path_to_image)
+void Canvas::saveImage(const fs::path& path_to_image)
 {
 	auto image = redactor_.acquireImage();
 
@@ -113,4 +156,14 @@ void Canvas::saveImage(const std::filesystem::path& path_to_image)
 	}
 
 	redactor_.loadImage(std::move(image));
+}
+
+ImageRedactor& Canvas::redactor()
+{
+	return redactor_;
+}
+
+const ImageRedactor& Canvas::redactor() const
+{
+	return redactor_;
 }

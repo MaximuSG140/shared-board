@@ -24,11 +24,20 @@ public:
         const sf::Color& color = sf::Color::Black);
     void selectBrush(int thickness,
         const sf::Color& color = sf::Color::Black);
+    void selectViewer();
+
+    void doubleScale();
+    void lowerScale();
+
+    void moveView(sf::Vector2i delta);
 
 	[[nodiscard]] bool containsCursor(sf::Vector2i cursor_point) const override;
 
     void loadImage(const std::filesystem::path& path_to_image) const;
     void saveImage(const std::filesystem::path& path_to_image);
+
+    ImageRedactor& redactor();
+    const ImageRedactor& redactor()const;
 protected:
     void draw(sf::RenderTarget& target,
         sf::RenderStates states) const override;
@@ -38,4 +47,6 @@ protected:
 private:
     ImageRedactor redactor_;
     std::unique_ptr<ICanvasTool> tool_;
+    sf::Vector2i camera_position_;
+    float scale_modifier_ = 1;
 };

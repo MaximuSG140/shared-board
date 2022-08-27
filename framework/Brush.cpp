@@ -1,15 +1,20 @@
 #include "pch.h"
 #include "Brush.h"
 
-Brush::Brush(const int thickness,
+#include "Canvas.h"
+
+Brush::Brush(Canvas& owner,
+             const int thickness,
              const sf::Color& color)
-	: color_(color),
+	: owner_(owner),
+	color_(color),
 	thickness_(thickness)
 {}
 
-void Brush::hold(ImageRedactor& redactor,
-                 const sf::Vector2i position)
+void Brush::hold(const sf::Vector2i position)
 {
+	auto& redactor = owner_.redactor();
+
 	if (!first_point_)
 	{
 		redactor.drawSegment(previous_point_,
@@ -25,10 +30,10 @@ void Brush::hold(ImageRedactor& redactor,
 	first_point_ = false;
 }
 
-void Brush::unHold(ImageRedactor& redactor)
+void Brush::unHold()
 {
 	first_point_ = true;
 }
 
-void Brush::click(ImageRedactor& redactor,
-                  sf::Vector2i position) {}
+void Brush::click(
+	sf::Vector2i position) {}

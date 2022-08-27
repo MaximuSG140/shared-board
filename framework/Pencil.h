@@ -2,20 +2,23 @@
 #include "ICanvasTool.h"
 
 
+class Canvas;
+
 class Pencil final:
     public ICanvasTool
 {
 public:
-	Pencil() = default;
-	explicit Pencil(int thickness,
+	explicit Pencil(Canvas& owner,
+		int thickness,
 		const sf::Color& color);
 
-	void hold(ImageRedactor& redactor,
+	void hold(
 		sf::Vector2i position) override;
-	void unHold(ImageRedactor& redactor) override;
-	void click(ImageRedactor& redactor,
+	void unHold() override;
+	void click(
 		sf::Vector2i position) override;
 private:
+	Canvas& owner_;
 	bool first_point_ = true;
 	sf::Vector2i previous_point_;
 	sf::Color color_ = sf::Color::Black;
