@@ -49,7 +49,8 @@ inline void SimpleButton::onClick(sf::Vector2i position)
 }
 
 
-inline void SimpleButton::draw(sf::RenderTarget& target, sf::RenderStates states) const
+inline void SimpleButton::draw(sf::RenderTarget& target,
+	sf::RenderStates states) const
 {
 	auto button_size = size();
 	auto button_position = position();
@@ -60,7 +61,8 @@ inline void SimpleButton::draw(sf::RenderTarget& target, sf::RenderStates states
 	body.setOutlineColor(OUTLINE_COLOR);
 	body.setPosition({static_cast<float>(button_position.x),
 		static_cast<float>(button_position.y)});
-	target.draw(body, states);
+	target.draw(body,
+		states);
 	sf::Text printable_text(text_,
 		GetDefaultFont(),
 		calculateLetterSize());

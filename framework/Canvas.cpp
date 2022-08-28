@@ -141,9 +141,9 @@ void Canvas::normalizeView()
 	auto image_size = redactor_.image().getSize();
 	auto body_size = size();
 	camera_position_.x = std::min(camera_position_.x,
-		static_cast<int>(static_cast<float>(image_size.x) - body_size.x / scale_modifier_));
+		static_cast<int>(static_cast<float>(image_size.x) - static_cast<float>(body_size.x) / scale_modifier_));
 	camera_position_.y = std::min(camera_position_.y,
-		static_cast<int>(static_cast<float>(image_size.y) - body_size.y / scale_modifier_));
+		static_cast<int>(static_cast<float>(image_size.y) - static_cast<float>(body_size.y) / scale_modifier_));
 	camera_position_.x = std::max(0,
 		camera_position_.x);
 	camera_position_.y = std::max(0,
