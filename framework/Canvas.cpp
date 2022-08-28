@@ -52,26 +52,19 @@ void Canvas::selectViewer()
 void Canvas::doubleScale()
 {
 	scale_modifier_ *= 2;
+	normalizeView();
 }
 
 void Canvas::lowerScale()
 {
 	scale_modifier_ /= 2;
+	normalizeView();
 }
 
 void Canvas::moveView(const sf::Vector2i delta)
 {
-	auto body_size = size();
-	auto image_size = redactor_.image().getSize();
 	camera_position_ += delta;
-	camera_position_.x = std::min(camera_position_.x,
-		static_cast<int>(image_size.x - body_size.x / scale_modifier_));
-	camera_position_.y = std::min(camera_position_.y,
-		static_cast<int>(image_size.y - body_size.y / scale_modifier_));
-	camera_position_.x = std::max(0,
-		camera_position_.x);
-	camera_position_.y = std::max(0,
-		camera_position_.y);
+	normalizeView();
 }
 
 void Canvas::draw(sf::RenderTarget& target,
@@ -80,18 +73,18 @@ void Canvas::draw(sf::RenderTarget& target,
 	auto canvas_size = size();
 	auto canvas_position = position();
 	sf::RectangleShape body({ static_cast<float>(canvas_size.x),
-		static_cast<float>(canvas_size.y)});
+		static_cast<float>(canvas_size.y) });
 	body.setOutlineThickness(OUTLINE_THICKNESS);
 	body.setOutlineColor(sf::Color::Black);
 	body.setFillColor(sf::Color::White);
 	body.setPosition({ static_cast<float>(canvas_position.x),
-		static_cast<float>(canvas_position.y)});
+		static_cast<float>(canvas_position.y) });
 	sf::Texture texture;
 	if(!texture.loadFromImage(redactor_.image(),
 			sf::IntRect{ camera_position_.x,
 				camera_position_.y,
-				static_cast<int>(canvas_size.x / scale_modifier_),
-				static_cast<int>(canvas_size.y / scale_modifier_) }))
+				static_cast<int>(static_cast<float>(canvas_size.x) / scale_modifier_),
+				static_cast<int>(static_cast<float>(canvas_size.y) / scale_modifier_) }))
 	{
 		Logger::log(Logger::LogLevel::FATAL,
 			"Error loading drawn image for rendering");
@@ -114,7 +107,11 @@ void Canvas::onClick(const sf::Vector2i mouse_position)
 	if(tool_)
 	{
 		auto relative_position = mouse_position - position();
-		tool_->click(relative_position);
+		auto relative_from_canvas = sf::Vector2i{ static_cast<int>(static_cast<float>(
+				relative_position.x) / scale_modifier_),
+			static_cast<int>(static_cast<float>(relative_position.y) / scale_modifier_) };
+		auto canvas_absolute_position = relative_from_canvas + camera_position_;
+		tool_->click(canvas_absolute_position);
 	}
 }
 
@@ -123,7 +120,11 @@ void Canvas::onHold(const sf::Vector2i mouse_position)
 	if(tool_)
 	{
 		auto relative_position = mouse_position - position();
-		tool_->hold(relative_position);
+		auto relative_from_canvas = sf::Vector2i{ static_cast<int>(static_cast<float>(
+				relative_position.x) / scale_modifier_),
+			static_cast<int>(static_cast<float>(relative_position.y) / scale_modifier_) };
+		auto canvas_absolute_position = relative_from_canvas + camera_position_;
+		tool_->hold(canvas_absolute_position);
 	}
 }
 
@@ -133,6 +134,20 @@ void Canvas::onHoldEnded()
 	{
 		tool_->unHold();
 	}
+}
+
+void Canvas::normalizeView()
+{
+	auto image_size = redactor_.image().getSize();
+	auto body_size = size();
+	camera_position_.x = std::min(camera_position_.x,
+		static_cast<int>(static_cast<float>(image_size.x) - body_size.x / scale_modifier_));
+	camera_position_.y = std::min(camera_position_.y,
+		static_cast<int>(static_cast<float>(image_size.y) - body_size.y / scale_modifier_));
+	camera_position_.x = std::max(0,
+		camera_position_.x);
+	camera_position_.y = std::max(0,
+		camera_position_.y);
 }
 
 bool Canvas::containsCursor(const sf::Vector2i cursor_point) const
@@ -156,6 +171,26 @@ void Canvas::saveImage(const fs::path& path_to_image)
 	}
 
 	redactor_.loadImage(std::move(image));
+}
+
+sf::Vector2i Canvas::computeImagePosition(const sf::Vector2i view_coordinates) const
+{
+	auto relative_from_canvas = sf::Vector2i{ static_cast<int>(static_cast<float>(
+			view_coordinates.x) / scale_modifier_),
+		static_cast<int>(static_cast<float>(view_coordinates.y) / scale_modifier_) };
+	return relative_from_canvas + camera_position_;;
+}
+
+sf::Vector2i Canvas::computeViewPosition(const sf::Vector2i image_coordinates) const
+{
+	auto relative_unscaled = image_coordinates - camera_position_;
+	return { static_cast<int>(static_cast<float>(relative_unscaled.x) * scale_modifier_),
+		static_cast<int>(static_cast<float>(relative_unscaled.y) * scale_modifier_) };
+}
+
+sf::Vector2i Canvas::viewPosition() const
+{
+	return camera_position_;
 }
 
 ImageRedactor& Canvas::redactor()

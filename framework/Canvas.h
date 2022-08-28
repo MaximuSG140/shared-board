@@ -36,6 +36,11 @@ public:
     void loadImage(const std::filesystem::path& path_to_image) const;
     void saveImage(const std::filesystem::path& path_to_image);
 
+    sf::Vector2i computeImagePosition(sf::Vector2i view_coordinates)const;
+    sf::Vector2i computeViewPosition(sf::Vector2i image_coordinates)const;
+
+    sf::Vector2i viewPosition()const;
+
     ImageRedactor& redactor();
     const ImageRedactor& redactor()const;
 protected:
@@ -45,6 +50,8 @@ protected:
     void onHold(sf::Vector2i mouse_position) override;
     void onHoldEnded() override;
 private:
+    void normalizeView();
+
     ImageRedactor redactor_;
     std::unique_ptr<ICanvasTool> tool_;
     sf::Vector2i camera_position_;

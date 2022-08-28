@@ -11,9 +11,9 @@ void CameraMoveTool::hold(const sf::Vector2i position)
 {
 	if(previous_mouse_position_.has_value())
 	{
-		owner_.moveView(previous_mouse_position_.value() - position);
+		owner_.moveView(previous_mouse_position_.value() - owner_.computeImagePosition(position));
 	}
-	previous_mouse_position_ = position;
+	previous_mouse_position_ = owner_.computeImagePosition(position);
 }
 
 void CameraMoveTool::unHold()
