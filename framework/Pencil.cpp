@@ -2,6 +2,7 @@
 #include "Pencil.h"
 
 #include "Canvas.h"
+#include "logger/log.h"
 
 Pencil::Pencil(Canvas& owner,
                const int thickness,
@@ -11,9 +12,10 @@ Pencil::Pencil(Canvas& owner,
 	thickness_(thickness)
 {}
 
-void Pencil::hold(
-	const sf::Vector2i position)
+void Pencil::hold(const sf::Vector2i position)
 {
+	Logger::log(Logger::LogLevel::DEBUG,
+		"Drawing using pencil of size " + std::to_string(thickness_));
 	auto& redactor = owner_.redactor();
 	if (!first_point_)
 	{

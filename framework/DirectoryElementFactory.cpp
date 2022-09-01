@@ -12,8 +12,5 @@ std::unique_ptr<IFileExplorerElement> DirectoryElementFactory::getElement(
 		return std::make_unique<RegularFileElement>(directory_element.path().filename().string(),
 			directory_element.file_size());
 	}
-	else
-	{
-		return std::make_unique<DirectoryElement>(directory_element.path().filename().string());
-	}
+	return std::make_unique<DirectoryElement>(directory_element.path().filename().string());
 }

@@ -5,7 +5,7 @@
 
 
 class BasicEdit final :
-    public RectangleWidget, IMouseSelectable, IKeyboardListener
+    public RectangleWidget, public IMouseSelectable, public IKeyboardListener
 {
 public:
     explicit BasicEdit(const std::string& name,
@@ -32,7 +32,9 @@ public:
 private:
     [[nodiscard]] unsigned calculateLetterSize()const;
     [[nodiscard]] sf::Vector2i calculateTextPosition()const;
-
+public:
+    [[nodiscard]] bool containsCursor(sf::Vector2i cursor_point) const override;
+private:
     std::string text_;
     bool editing_ = false;
 };

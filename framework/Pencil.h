@@ -12,8 +12,7 @@ public:
 		int thickness,
 		const sf::Color& color);
 
-	void hold(
-		sf::Vector2i position) override;
+	void hold(sf::Vector2i position) override;
 	void unHold() override;
 	void click(
 		sf::Vector2i position) override;

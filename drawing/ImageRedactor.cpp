@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "ImageRedactor.h"
 #include "Geometry.h"
+#include "logger/log.h"
 
 ImageRedactor::ImageRedactor()
 	: image_(std::make_unique<sf::Image>())
@@ -63,6 +64,8 @@ void ImageRedactor::drawPoint(const sf::Vector2i position,
                               const int thickness,
                               const sf::Color& color)
 {
+	Logger::log(Logger::LogLevel::DEBUG,
+		"Drawing solid point of size " + std::to_string(thickness));
 	if (!isValidPoint(position))
 	{
 		throw std::out_of_range("Attempt to draw pixel out of image bounds");

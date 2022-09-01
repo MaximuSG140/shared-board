@@ -1,2 +1,5 @@
-﻿  ImageRedactor.cpp
+﻿  pch.cpp
+  Geometry.cpp
+  ImageRedactor.cpp
+  Создание кода...
   drawing.vcxproj -> C:\Users\Maxim\IdeaProjects\BattleRoyalRefactored\shared-board\Debug\drawing.lib

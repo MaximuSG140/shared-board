@@ -1,8 +1,10 @@
 #include "StandaloneApplication.h"
 
+#include "framework/BasicEdit.h"
 #include "framework/Canvas.h"
 #include "framework/FileDialog.h"
 #include "framework/FileExplorer.h"
+#include "framework/Label.h"
 #include "framework/SimpleButton.h"
 
 StandaloneApplication::StandaloneApplication()
@@ -11,23 +13,8 @@ StandaloneApplication::StandaloneApplication()
 		"Drawer")	
 {
 	auto drawing_canvas = addWidget<Canvas>("Main",
-		sf::Vector2i{ 10, 10 },
-		sf::Vector2u{ 900, 500 });
-
-	addWidget<SimpleButton>("Pencil",
-		sf::Vector2i{ 920, 10 },
-		sf::Vector2u{ 100, 100 },
-		[=]()
-	{
-		drawing_canvas->selectPencil(10);
-	});
-	addWidget<SimpleButton>("Brush",
-		sf::Vector2i{ 920, 120 },
-		sf::Vector2u{ 100, 100 },
-		[=]()
-	{
-		drawing_canvas->selectBrush(10);
-	});
+	                                        sf::Vector2i{ 10, 10 },
+	                                        sf::Vector2u{ 900, 500 });
 	addWidget<SimpleButton>("Load",
 		sf::Vector2i{ 410, 520 },
 		sf::Vector2u{ 100, 100 },
@@ -65,9 +52,31 @@ StandaloneApplication::StandaloneApplication()
 		{
 			drawing_canvas->selectViewer();
 		});
+	auto pencil_size_edit = addWidget<BasicEdit>("Size",
+	                                  sf::Vector2i{920, 560},
+	                                  sf::Vector2u{300, 75});
+
+	addWidget<Label>("ChoseSizeLabel",
+		sf::Vector2i{ 720, 560 },
+		sf::Vector2u{ 200, 75 },
+		"Enter pencil size");
+
+	addWidget<SimpleButton>("Pencil",
+		sf::Vector2i{ 920, 10 },
+		sf::Vector2u{ 100, 100 },
+		[=]()
+		{
+			drawing_canvas->selectPencil(std::stoi(pencil_size_edit->text()));
+		});
+	addWidget<SimpleButton>("Brush",
+		sf::Vector2i{ 920, 120 },
+		sf::Vector2u{ 100, 100 },
+		[=]()
+		{
+			drawing_canvas->selectBrush(std::stoi(pencil_size_edit->text()));
+		});
+
 }
 
 void StandaloneApplication::handle(const sf::Event& event)
-{
-	
-}
+{}

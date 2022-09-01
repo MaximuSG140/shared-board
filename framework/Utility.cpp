@@ -84,12 +84,72 @@ char GetCorrespondingCharacter(const sf::Event::KeyEvent& event)
 	case sf::Keyboard::Z:
 		character = 'z';
 		break;
+	case sf::Keyboard::Num0:
+		character = '0';
+		break;
+	case sf::Keyboard::Num1:
+		character = '1';
+		break;
+	case sf::Keyboard::Num2:
+		character = '2';
+		break;
+	case sf::Keyboard::Num3:
+		character = '3';
+		break;
+	case sf::Keyboard::Num4:
+		character = '4';
+		break;
+	case sf::Keyboard::Num5:
+		character = '5';
+		break;
+	case sf::Keyboard::Num6:
+		character = '6';
+		break;
+	case sf::Keyboard::Num7:
+		character = '7';
+		break;
+	case sf::Keyboard::Num8:
+		character = '8';
+		break;
+	case sf::Keyboard::Num9:
+		character = '9';
+		break;
+	case sf::Keyboard::Numpad0:
+		character = '0';
+		break;
+	case sf::Keyboard::Numpad1:
+		character = '1';
+		break;
+	case sf::Keyboard::Numpad2:
+		character = '2';
+		break;
+	case sf::Keyboard::Numpad3:
+		character = '3';
+		break;
+	case sf::Keyboard::Numpad4:
+		character = '4';
+		break;
+	case sf::Keyboard::Numpad5:
+		character = '5';
+		break;
+	case sf::Keyboard::Numpad6:
+		character = '6';
+		break;
+	case sf::Keyboard::Numpad7:
+		character = '7';
+		break;
+	case sf::Keyboard::Numpad8:
+		character = '8';
+		break;
+	case sf::Keyboard::Numpad9:
+		character = '9';
+		break;
 	default: 
 		character = '\0';
 	}
 	if(event.shift)
 	{
-		character = std::toupper(character);
+		character = static_cast<char>(std::toupper(character));
 	}
 	return character;
 }

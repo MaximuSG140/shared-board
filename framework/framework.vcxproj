@@ -162,17 +162,20 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="BasicEdit.h" />
     <ClInclude Include="Brush.h" />
+    <ClInclude Include="CameraMoveTool.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="DirectoryElementFactory.h" />
+    <ClInclude Include="ErrorMessage.h" />
     <ClInclude Include="FileDialog.h" />
     <ClInclude Include="FileExplorer.h" />
     <ClInclude Include="DirectoryElement.h" />
     <ClInclude Include="IScrollable.h" />
+    <ClInclude Include="Label.h" />
     <ClInclude Include="RegularFileElement.h" />
     <ClInclude Include="FontOwner.h" />
     <ClInclude Include="IFileExplorerElement.h" />
-    <ClInclude Include="IDrawingTool.h" />
+    <ClInclude Include="ICanvasTool.h" />
     <ClInclude Include="IMouseAccessible.h" />
     <ClInclude Include="IMouseSelectable.h" />
     <ClInclude Include="IKeyboardListener.h" />
@@ -183,6 +186,8 @@
     <ClInclude Include="IMouseClickable.h" />
     <ClInclude Include="IMouseHoldable.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="SlicedText.h" />
+    <ClInclude Include="TextBox.h" />
     <ClInclude Include="TextureOwner.h" />
     <ClInclude Include="Utility.h" />
     <ClInclude Include="Widget.h" />
@@ -191,12 +196,15 @@
   <ItemGroup>
     <ClCompile Include="BasicEdit.cpp" />
     <ClCompile Include="Brush.cpp" />
+    <ClCompile Include="CameraMoveTool.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="DirectoryElementFactory.cpp" />
+    <ClCompile Include="ErrorMessage.cpp" />
     <ClCompile Include="FileDialog.cpp" />
     <ClCompile Include="FileExplorer.cpp" />
     <ClCompile Include="DirectoryElement.cpp" />
+    <ClCompile Include="Label.cpp" />
     <ClCompile Include="RegularFileElement.cpp" />
     <ClCompile Include="FontOwner.cpp" />
     <ClCompile Include="IFileExplorerElement.cpp" />
@@ -212,6 +220,8 @@
     <ClCompile Include="Pencil.cpp" />
     <ClCompile Include="RectangleWidget.cpp" />
     <ClCompile Include="Resources.cpp" />
+    <ClCompile Include="SlicedText.cpp" />
+    <ClCompile Include="TextBox.cpp" />
     <ClCompile Include="TextureOwner.cpp" />
     <ClCompile Include="Utility.cpp" />
     <ClCompile Include="Widget.cpp" />

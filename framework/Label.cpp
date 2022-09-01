@@ -19,7 +19,7 @@ void Label::draw(sf::RenderTarget& target,
 	sf::Text text(text_,
 		GetDefaultFont(),
 		calculateLetterSize());
-	text.setFillColor(sf::Color::White);
+	text.setFillColor(sf::Color::Black);
 	text.setPosition(static_cast<sf::Vector2f>(position()));
 	target.draw(text,
 		states);
@@ -32,7 +32,7 @@ unsigned Label::calculateLetterSize() const
 {
 	unsigned letter_size_left = 1;
 	auto label_size = size();
-	unsigned letter_size_right = std::min(label_size.x / 2, label_size.y / 2);
+	unsigned letter_size_right = std::min(label_size.x, label_size.y / 2);
 	while (letter_size_right - letter_size_left > 1)
 	{
 		auto new_bound = (letter_size_right + letter_size_left) / 2;
@@ -40,7 +40,7 @@ unsigned Label::calculateLetterSize() const
 			GetDefaultFont(),
 			new_bound);
 		if (auto text_bounds = test_text.getLocalBounds();
-			text_bounds.width > static_cast<float>(label_size.x) / 2 ||
+			text_bounds.width > static_cast<float>(label_size.x) ||
 			text_bounds.height > static_cast<float>(label_size.y) / 2)
 		{
 			letter_size_right = new_bound;

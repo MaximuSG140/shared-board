@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "BasicEdit.h"
+
+#include "Resources.h"
 #include "Utility.h"
 
 BasicEdit::BasicEdit(const std::string& name,
@@ -51,7 +53,9 @@ void BasicEdit::draw(sf::RenderTarget& target,
 	body.setPosition({ static_cast<float>(edit_position.x),
 		static_cast<float>(edit_position.y) });
 	body.setFillColor(BODY_COLOR);
-	sf::Text printable_text(text_, sf::Font(), calculateLetterSize());
+	sf::Text printable_text(text_,
+		GetDefaultFont(),
+		calculateLetterSize());
 	auto text_position = calculateTextPosition();
 	printable_text.setPosition({ static_cast<float>(text_position.x),
 		static_cast<float>(text_position.y) });
@@ -83,12 +87,14 @@ unsigned BasicEdit::calculateLetterSize() const
 {
 	auto edit_size = size();
 	unsigned left_bound = 1;
-	unsigned right_bound = std::min(edit_size.x / 2,
+	unsigned right_bound = std::min(edit_size.x,
 		edit_size.y / 2);
 	while(right_bound - left_bound > 1)
 	{
 		auto new_bound = (left_bound + right_bound) / 2;
-		sf::Text test_text(text_, sf::Font(), new_bound);
+		sf::Text test_text(text_, 
+			GetDefaultFont(),
+			new_bound);
 		if(auto text_bounds = test_text.getLocalBounds(); 
 			text_bounds.width < static_cast<float>(edit_size.x) && 
 			text_bounds.height < static_cast<float>(edit_size.y) / 2)
@@ -107,8 +113,15 @@ sf::Vector2i BasicEdit::calculateTextPosition() const
 {
 	auto edit_position = position();
 	auto edit_size = size();
-	sf::Text test_text(text_, sf::Font(), calculateLetterSize());
+	sf::Text test_text(text_,
+		GetDefaultFont(),
+		calculateLetterSize());
 	return { edit_position.x,
 		static_cast<int>(static_cast<float>(edit_position.y) + 
 			static_cast<float>(edit_size.y) / 2 - test_text.getLocalBounds().height / 2) };
+}
+
+bool BasicEdit::containsCursor(const sf::Vector2i cursor_point) const
+{
+	return RectangleWidget::containsCursor(cursor_point);
 }
