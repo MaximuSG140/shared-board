@@ -1,8 +1,8 @@
 #include "pch.h"
-#include "Widget/ElementList/FileExplorer/RegularFileElement.h"
+#include "framework/include/Widget/ElementList/FileExplorer/RegularFileElement.h"
 
-#include "Resource/Resources.h"
-#include "Widget/ElementList/FileExplorer/FileExplorer.h"
+#include "framework/include/Resource/Resources.h"
+#include "framework/include/Widget/ElementList/FileExplorer/FileExplorer.h"
 
 RegularFileElement::RegularFileElement(std::string file_name,
                                        const long long file_size)

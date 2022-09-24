@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Widget/Traits/RectangleWidget.h"
+#include "framework/include/Widget/Traits/RectangleWidget.h"
 
 RectangleWidget::RectangleWidget(const std::string& name,
                                  const sf::Vector2i position,

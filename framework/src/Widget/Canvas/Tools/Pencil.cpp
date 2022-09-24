@@ -1,8 +1,8 @@
 #include "pch.h"
-#include "Widget/Canvas/Tools/Pencil.h"
+#include "framework/include/Widget/Canvas/Tools/Pencil.h"
 
 #include "logger/log.h"
-#include "Widget/Canvas/Canvas.h"
+#include "framework/include/Widget/Canvas/Canvas.h"
 
 Pencil::Pencil(Canvas& owner,
                const int thickness,

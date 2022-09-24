@@ -1,2 +1,2 @@
 #pragma once
-#include "Resource/Resources.h"
+#include "framework/include/Resource/Resources.h"

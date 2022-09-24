@@ -1,11 +1,11 @@
 #include "pch.h"
-#include "Widget/Canvas/Canvas.h"
+#include "framework/include/Widget/Canvas/Canvas.h"
 
 #include "logger/log.h"
-#include "Widget/Canvas/Tools/Brush.h"
-#include "Widget/Canvas/Tools/CameraMoveTool.h"
-#include "Widget/Canvas/Tools/Pencil.h"
-#include "Widget/Traits/RectangleWidget.h"
+#include "framework/include/Widget/Canvas/Tools/Brush.h"
+#include "framework/include/Widget/Canvas/Tools/CameraMoveTool.h"
+#include "framework/include/Widget/Canvas/Tools/Pencil.h"
+#include "framework/include/Widget/Traits/RectangleWidget.h"
 
 namespace fs = std::filesystem;
 

@@ -1,11 +1,11 @@
 #pragma once
-#include "pch.h"
+#include "framework/include/pch.h"
 
 #include "drawing/ImageRedactor.h"
-#include "Tools/ICanvasTool.h"
-#include "Widget/Traits/IMouseClickable.h"
-#include "Widget/Traits/IMouseHoldable.h"
-#include "Widget/Traits/RectangleWidget.h"
+#include "framework/include/Widget/Canvas/Tools/ICanvasTool.h"
+#include "framework/include/Widget/Traits/IMouseClickable.h"
+#include "framework/include/Widget/Traits/IMouseHoldable.h"
+#include "framework/include/Widget/Traits/RectangleWidget.h"
 
 class Canvas final :
     public RectangleWidget, public IMouseClickable, public IMouseHoldable

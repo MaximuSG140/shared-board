@@ -1,7 +1,7 @@
 #pragma once
-#include "Button.h"
+#include "framework/include/Widget/Button/Button.h"
 #include "logger/log.h"
-#include "Resource/Resources.h"
+#include "framework/include/Resource/Resources.h"
 
 class SimpleButton final :
     public Button

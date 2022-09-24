@@ -1,6 +1,6 @@
 #pragma once
-#include "Widget/Traits/IMouseClickable.h"
-#include "Widget/Traits/RectangleWidget.h"
+#include "framework/include/Widget/Traits/IMouseClickable.h"
+#include "framework/include/Widget/Traits/RectangleWidget.h"
 
 class Button :
     public RectangleWidget, public IMouseClickable

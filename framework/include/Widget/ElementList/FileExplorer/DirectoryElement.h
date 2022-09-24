@@ -1,5 +1,5 @@
 #pragma once
-#include "IFileExplorerElement.h"
+#include "framework/include/Widget/ElementList/FileExplorer/IFileExplorerElement.h"
 
 class DirectoryElement final :
     public IFileExplorerElement

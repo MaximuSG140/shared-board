@@ -1,7 +1,7 @@
 #include "pch.h"
-#include "Widget/Canvas/Tools/CameraMoveTool.h"
+#include "framework/include/Widget/Canvas/Tools/CameraMoveTool.h"
 
-#include "Widget/Canvas/Canvas.h"
+#include "framework/include/Widget/Canvas/Canvas.h"
 
 CameraMoveTool::CameraMoveTool(Canvas& owner)
 	:owner_(owner)

@@ -1,3 +1,3 @@
 #pragma once
-#include "Canvas/Canvas.h"
-#include "Canvas/Tools.h"
+#include "framework/include/Widget/Canvas/Canvas.h"
+#include "framework/include/Widget/Canvas/Tools.h"

@@ -1,7 +1,7 @@
 #include "pch.h"
-#include "Widget/Canvas/Tools/Brush.h"
+#include "framework/include/Widget/Canvas/Tools/Brush.h"
 
-#include "Widget/Canvas/Canvas.h"
+#include "framework/include/Widget/Canvas/Canvas.h"
 
 Brush::Brush(Canvas& owner,
              const int thickness,

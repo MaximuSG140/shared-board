@@ -1,5 +1,4 @@
 #pragma once
-#include "drawing/ImageRedactor.h"
 
 class ICanvasTool
 {

@@ -1,5 +1,5 @@
 #pragma once
-#include "IMouseAccessible.h"
+#include "framework/include/Widget/Traits/IMouseAccessible.h"
 
 
 class IMouseClickable

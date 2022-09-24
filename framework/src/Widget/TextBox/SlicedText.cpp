@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Widget/TextBox/SlicedText.h"
+#include "framework/include/Widget/TextBox/SlicedText.h"
 
 
 SlicedText::SlicedText(const std::string& text)

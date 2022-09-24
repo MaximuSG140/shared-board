@@ -1,6 +1,6 @@
 #pragma once
-#include "pch.h"
-#include "IMouseAccessible.h"
+#include "framework/include/pch.h"
+#include "framework/include/Widget/Traits/IMouseAccessible.h"
 
 class IMouseHoldable
     : public IMouseAccessible

@@ -1,8 +1,8 @@
 #include "pch.h"
-#include "Widget/Label/Label.h"
+#include "framework/include/Widget/Label/Label.h"
 
-#include "Resource/Resources.h"
-#include "Widget/Traits/RectangleWidget.h"
+#include "framework/include/Resource/Resources.h"
+#include "framework/include/Widget/Traits/RectangleWidget.h"
 
 Label::Label(const std::string& name,
              const sf::Vector2i position,

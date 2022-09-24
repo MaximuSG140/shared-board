@@ -1,9 +1,9 @@
 #pragma once
-#include "DirectoryElementFactory.h"
-#include "IFileExplorerElement.h"
-#include "Widget/Traits/IMouseClickable.h"
-#include "Widget/Traits/IScrollable.h"
-#include "Widget/Traits/RectangleWidget.h"
+#include "framework/include/Widget/ElementList/FileExplorer/DirectoryElementFactory.h"
+#include "framework/include/Widget/ElementList/FileExplorer/IFileExplorerElement.h"
+#include "framework/include/Widget/Traits/IMouseClickable.h"
+#include "framework/include/Widget/Traits/IScrollable.h"
+#include "framework/include/Widget/Traits/RectangleWidget.h"
 
 
 class FileExplorer final :

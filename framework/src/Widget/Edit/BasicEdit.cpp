@@ -1,9 +1,9 @@
 #include "pch.h"
-#include "Widget/Edit/BasicEdit.h"
+#include "framework/include/Widget/Edit/BasicEdit.h"
 
-#include "Utility.h"
-#include "Resource/Resources.h"
-#include "Widget/Traits/RectangleWidget.h"
+#include "framework/include/Utility.h"
+#include "framework/include/Resource/Resources.h"
+#include "framework/include/Widget/Traits/RectangleWidget.h"
 
 BasicEdit::BasicEdit(const std::string& name,
                      const sf::Vector2i position,

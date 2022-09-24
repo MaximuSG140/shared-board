@@ -1,7 +1,7 @@
 #pragma once
-#include "Widget/Traits/IKeyboardListener.h"
-#include "Widget/Traits/IMouseSelectable.h"
-#include "Widget/Traits/RectangleWidget.h"
+#include "framework/include/Widget/Traits/IKeyboardListener.h"
+#include "framework/include/Widget/Traits/IMouseSelectable.h"
+#include "framework/include/Widget/Traits/RectangleWidget.h"
 
 
 class BasicEdit final :

@@ -1,10 +1,10 @@
 #include "pch.h"
 
-#include "Resource/FontOwner.h"
-#include "Resource/Resources.h"
-#include "Resource/TextureOwner.h"
-#include "Widget/ElementList/FileExplorer/DirectoryElement.h"
-#include "Widget/ElementList/FileExplorer/RegularFileElement.h"
+#include "framework/include/Resource/FontOwner.h"
+#include "framework/include/Resource/Resources.h"
+#include "framework/include/Resource/TextureOwner.h"
+#include "framework/include/Widget/ElementList/FileExplorer/DirectoryElement.h"
+#include "framework/include/Widget/ElementList/FileExplorer/RegularFileElement.h"
 
 const sf::Texture& GetDirectoryIcon()
 {

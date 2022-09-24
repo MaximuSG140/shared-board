@@ -1,7 +1,7 @@
 #include "pch.h"
-#include "Widget/ElementList/FileExplorer/DirectoryElement.h"
+#include "framework/include/Widget/ElementList/FileExplorer/DirectoryElement.h"
 
-#include "Resource/Resources.h"
+#include "framework/include/Resource/Resources.h"
 
 
 DirectoryElement::DirectoryElement(std::string directory_name)

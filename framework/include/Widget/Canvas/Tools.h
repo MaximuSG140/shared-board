@@ -1,5 +1,5 @@
 #pragma once
-#include "Tools/Brush.h"
-#include "Tools/Pencil.h"
-#include "Tools/CameraMoveTool.h"
-#include "Tools/ICanvasTool.h"
+#include "framework/include/Widget/Canvas/Tools/Brush.h"
+#include "framework/include/Widget/Canvas/Tools/Pencil.h"
+#include "framework/include/Widget/Canvas/Tools/CameraMoveTool.h"
+#include "framework/include/Widget/Canvas/Tools/ICanvasTool.h"

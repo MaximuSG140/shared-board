@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "App/ErrorMessage.h"
+#include "framework/include/App/ErrorMessage.h"
 
 ErrorMessage::ErrorMessage(const std::string& name,
                            const std::string& message)

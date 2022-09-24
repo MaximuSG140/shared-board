@@ -1,9 +1,9 @@
 #include "pch.h"
-#include "App/FileDialog.h"
+#include "framework/include/App/FileDialog.h"
 
 
 FileDialog::FileDialog()
-	:WindowApplication(sf::VideoMode(WINDOW_WIDTH,
+	: WindowApplication(sf::VideoMode(WINDOW_WIDTH,
 			WINDOW_HEIGHT),
 		"Choose file",
 		sf::Style::Titlebar | sf::Style::Close)

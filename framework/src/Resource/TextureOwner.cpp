@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Resource/TextureOwner.h"
+#include "framework/include/Resource/TextureOwner.h"
 
 #include "logger/log.h"
 

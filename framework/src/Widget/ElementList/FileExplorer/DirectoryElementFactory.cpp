@@ -1,9 +1,9 @@
 #include "pch.h"
-#include "Widget/ElementList/FileExplorer/DirectoryElementFactory.h"
+#include "framework/include/Widget/ElementList/FileExplorer/DirectoryElementFactory.h"
 
-#include "Widget/ElementList/FileExplorer/DirectoryElement.h"
-#include "Widget/ElementList/FileExplorer/IFileExplorerElement.h"
-#include "Widget/ElementList/FileExplorer/RegularFileElement.h"
+#include "framework/include/Widget/ElementList/FileExplorer/DirectoryElement.h"
+#include "framework/include/Widget/ElementList/FileExplorer/IFileExplorerElement.h"
+#include "framework/include/Widget/ElementList/FileExplorer/RegularFileElement.h"
 
 
 std::unique_ptr<IFileExplorerElement> DirectoryElementFactory::getElement(

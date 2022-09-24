@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Widget/Traits/IMouseClickable.h"
+#include "framework/include/Widget/Traits/IMouseClickable.h"
 
 void IMouseClickable::startClick(const sf::Vector2i mouse_position)
 {

@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Widget/Traits/IMouseSelectable.h"
+#include "framework/include/Widget/Traits/IMouseSelectable.h"
 
 void IMouseSelectable::interact(const sf::Vector2i mouse_position)
 {

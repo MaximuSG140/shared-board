@@ -1,8 +1,8 @@
 #include "pch.h"
-#include "Widget/ElementList/FileExplorer/FileExplorer.h"
+#include "framework/include/Widget/ElementList/FileExplorer/FileExplorer.h"
 
-#include "Widget/ElementList/FileExplorer/DirectoryElement.h"
-#include "Widget/Traits/RectangleWidget.h"
+#include "framework/include/Widget/ElementList/FileExplorer/DirectoryElement.h"
+#include "framework/include/Widget/Traits/RectangleWidget.h"
 
 
 FileExplorer::FileExplorer(const std::string& name,
