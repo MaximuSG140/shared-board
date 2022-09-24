@@ -1,11 +1,12 @@
 #include "StandaloneApplication.h"
 
-#include "framework/BasicEdit.h"
-#include "framework/Canvas.h"
-#include "framework/FileDialog.h"
-#include "framework/FileExplorer.h"
-#include "framework/Label.h"
-#include "framework/SimpleButton.h"
+#include <SFML/Window/VideoMode.hpp>
+
+#include "framework/include/App/FileDialog.h"
+#include "framework/include/Widget/Button/SimpleButton.h"
+#include "framework/include/Widget/Canvas/Canvas.h"
+#include "framework/include/Widget/Edit/BasicEdit.h"
+#include "framework/include/Widget/Label/Label.h"
 
 StandaloneApplication::StandaloneApplication()
 	: WindowApplication(sf::VideoMode(DEFAULT_WINDOW_WIDTH,
@@ -55,6 +56,7 @@ StandaloneApplication::StandaloneApplication()
 	auto pencil_size_edit = addWidget<BasicEdit>("Size",
 	                                  sf::Vector2i{920, 560},
 	                                  sf::Vector2u{300, 75});
+	pencil_size_edit->setText("10");
 
 	addWidget<Label>("ChoseSizeLabel",
 		sf::Vector2i{ 720, 560 },

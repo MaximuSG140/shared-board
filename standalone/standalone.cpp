@@ -1,5 +1,4 @@
-﻿#include <iostream>
-#include "StandaloneApplication.h"
+﻿#include "StandaloneApplication.h"
 
 int main()
 {

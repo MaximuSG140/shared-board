@@ -1,6 +1,7 @@
 #pragma once
-#include "framework/Canvas.h"
-#include "framework/WindowApplication.h"
+#include <SFML/Window/Event.hpp>
+
+#include "framework/include/App/WindowApplication.h"
 
 class StandaloneApplication final
 	: public WindowApplication
@@ -14,5 +15,6 @@ public:
 	StandaloneApplication();
 
 	void handle(const sf::Event& event) override;
+	~StandaloneApplication() override = default;
 };
 
