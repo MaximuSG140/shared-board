@@ -72,19 +72,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir);$(ProjectDir)\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir);$(ProjectDir)\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir);$(ProjectDir)\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir);$(ProjectDir)\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -159,75 +159,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h" />
-    <ClInclude Include="BasicEdit.h" />
-    <ClInclude Include="Brush.h" />
-    <ClInclude Include="CameraMoveTool.h" />
-    <ClInclude Include="Canvas.h" />
-    <ClInclude Include="Button.h" />
-    <ClInclude Include="DirectoryElementFactory.h" />
-    <ClInclude Include="ErrorMessage.h" />
-    <ClInclude Include="FileDialog.h" />
-    <ClInclude Include="FileExplorer.h" />
-    <ClInclude Include="DirectoryElement.h" />
-    <ClInclude Include="IScrollable.h" />
-    <ClInclude Include="Label.h" />
-    <ClInclude Include="RegularFileElement.h" />
-    <ClInclude Include="FontOwner.h" />
-    <ClInclude Include="IFileExplorerElement.h" />
-    <ClInclude Include="ICanvasTool.h" />
-    <ClInclude Include="IMouseAccessible.h" />
-    <ClInclude Include="IMouseSelectable.h" />
-    <ClInclude Include="IKeyboardListener.h" />
-    <ClInclude Include="Pencil.h" />
-    <ClInclude Include="RectangleWidget.h" />
-    <ClInclude Include="Resources.h" />
-    <ClInclude Include="SimpleButton.h" />
-    <ClInclude Include="IMouseClickable.h" />
-    <ClInclude Include="IMouseHoldable.h" />
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="SlicedText.h" />
-    <ClInclude Include="TextBox.h" />
-    <ClInclude Include="TextureOwner.h" />
-    <ClInclude Include="Utility.h" />
-    <ClInclude Include="Widget.h" />
-    <ClInclude Include="WindowApplication.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="BasicEdit.cpp" />
-    <ClCompile Include="Brush.cpp" />
-    <ClCompile Include="CameraMoveTool.cpp" />
-    <ClCompile Include="Canvas.cpp" />
-    <ClCompile Include="Button.cpp" />
-    <ClCompile Include="DirectoryElementFactory.cpp" />
-    <ClCompile Include="ErrorMessage.cpp" />
-    <ClCompile Include="FileDialog.cpp" />
-    <ClCompile Include="FileExplorer.cpp" />
-    <ClCompile Include="DirectoryElement.cpp" />
-    <ClCompile Include="Label.cpp" />
-    <ClCompile Include="RegularFileElement.cpp" />
-    <ClCompile Include="FontOwner.cpp" />
-    <ClCompile Include="IFileExplorerElement.cpp" />
-    <ClCompile Include="IMouseClickable.cpp" />
-    <ClCompile Include="IMouseHoldable.cpp" />
-    <ClCompile Include="IMouseSelectable.cpp" />
-    <ClCompile Include="pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Pencil.cpp" />
-    <ClCompile Include="RectangleWidget.cpp" />
-    <ClCompile Include="Resources.cpp" />
-    <ClCompile Include="SlicedText.cpp" />
-    <ClCompile Include="TextBox.cpp" />
-    <ClCompile Include="TextureOwner.cpp" />
-    <ClCompile Include="Utility.cpp" />
-    <ClCompile Include="Widget.cpp" />
-    <ClCompile Include="WindowApplication.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -237,6 +168,88 @@
     <ProjectReference Include="..\logger\logger.vcxproj">
       <Project>{a10bb264-67a1-410c-aee0-b293a0eb74cf}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\App.h" />
+    <ClInclude Include="include\App\Application.h" />
+    <ClInclude Include="include\App\ErrorMessage.h" />
+    <ClInclude Include="include\App\FileDialog.h" />
+    <ClInclude Include="include\App\WindowApplication.h" />
+    <ClInclude Include="include\pch.h" />
+    <ClInclude Include="include\Resource.h" />
+    <ClInclude Include="include\Resource\FontOwner.h" />
+    <ClInclude Include="include\Resource\Resources.h" />
+    <ClInclude Include="include\Resource\TextureOwner.h" />
+    <ClInclude Include="include\Utility.h" />
+    <ClInclude Include="include\Utility\Utility.h" />
+    <ClInclude Include="include\Widget.h" />
+    <ClInclude Include="include\Widget\Button.h" />
+    <ClInclude Include="include\Widget\Button\Button.h" />
+    <ClInclude Include="include\Widget\Button\SimpleButton.h" />
+    <ClInclude Include="include\Widget\Canvas.h" />
+    <ClInclude Include="include\Widget\Canvas\Canvas.h" />
+    <ClInclude Include="include\Widget\Canvas\Tools.h" />
+    <ClInclude Include="include\Widget\Canvas\Tools\Brush.h" />
+    <ClInclude Include="include\Widget\Canvas\Tools\CameraMoveTool.h" />
+    <ClInclude Include="include\Widget\Canvas\Tools\ICanvasTool.h" />
+    <ClInclude Include="include\Widget\Canvas\Tools\Pencil.h" />
+    <ClInclude Include="include\Widget\Edit.h" />
+    <ClInclude Include="include\Widget\Edit\BasicEdit.h" />
+    <ClInclude Include="include\Widget\ElementList.h" />
+    <ClInclude Include="include\Widget\ElementList\FileExplorer.h" />
+    <ClInclude Include="include\Widget\ElementList\FileExplorer\DirectoryElement.h" />
+    <ClInclude Include="include\Widget\ElementList\FileExplorer\DirectoryElementFactory.h" />
+    <ClInclude Include="include\Widget\ElementList\FileExplorer\FileExplorer.h" />
+    <ClInclude Include="include\Widget\ElementList\FileExplorer\IFileExplorerElement.h" />
+    <ClInclude Include="include\Widget\ElementList\FileExplorer\RegularFileElement.h" />
+    <ClInclude Include="include\Widget\Label.h" />
+    <ClInclude Include="include\Widget\Label\Label.h" />
+    <ClInclude Include="include\Widget\TextBox.h" />
+    <ClInclude Include="include\Widget\TextBox\SlicedText.h" />
+    <ClInclude Include="include\Widget\TextBox\TextBox.h" />
+    <ClInclude Include="include\Widget\Traits\IKeyboardListener.h" />
+    <ClInclude Include="include\Widget\Traits\IMouseAccessible.h" />
+    <ClInclude Include="include\Widget\Traits\IMouseClickable.h" />
+    <ClInclude Include="include\Widget\Traits\IMouseHoldable.h" />
+    <ClInclude Include="include\Widget\Traits\IMouseSelectable.h" />
+    <ClInclude Include="include\Widget\Traits\IScrollable.h" />
+    <ClInclude Include="include\Widget\Traits\RectangleWidget.h" />
+    <ClInclude Include="include\Widget\Traits\Widget.h" />
+    <ClInclude Include="include\Widget\Traits.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\App\ErrorMessage.cpp" />
+    <ClCompile Include="src\App\FileDialog.cpp" />
+    <ClCompile Include="src\App\WindowApplication.cpp" />
+    <ClCompile Include="src\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\Resource\FontOwner.cpp" />
+    <ClCompile Include="src\Resource\Resource.cpp" />
+    <ClCompile Include="src\Resource\TextureOwner.cpp" />
+    <ClCompile Include="src\Utility\Utility.cpp" />
+    <ClCompile Include="src\Widget\Button\Button.cpp" />
+    <ClCompile Include="src\Widget\Canvas\Canvas.cpp" />
+    <ClCompile Include="src\Widget\Canvas\Tools\Brush.cpp" />
+    <ClCompile Include="src\Widget\Canvas\Tools\CameraMoveTool.cpp" />
+    <ClCompile Include="src\Widget\Canvas\Tools\Pencil.cpp" />
+    <ClCompile Include="src\Widget\Edit\BasicEdit.cpp" />
+    <ClCompile Include="src\Widget\ElementList\FileExplorer\DirectoryElement.cpp" />
+    <ClCompile Include="src\Widget\ElementList\FileExplorer\DirectoryElementFactory.cpp" />
+    <ClCompile Include="src\Widget\ElementList\FileExplorer\FileExplorer.cpp" />
+    <ClCompile Include="src\Widget\ElementList\FileExplorer\IFileExplorerElement.cpp" />
+    <ClCompile Include="src\Widget\ElementList\FileExplorer\RegularFileElement.cpp" />
+    <ClCompile Include="src\Widget\Label\Label.cpp" />
+    <ClCompile Include="src\Widget\TextBox\SlicedText.cpp" />
+    <ClCompile Include="src\Widget\TextBox\TextBox.cpp" />
+    <ClCompile Include="src\Widget\Traits\IMouseClickable.cpp" />
+    <ClCompile Include="src\Widget\Traits\IMouseHoldable.cpp" />
+    <ClCompile Include="src\Widget\Traits\IMouseSelectable.cpp" />
+    <ClCompile Include="src\Widget\Traits\RectangleWidget.cpp" />
+    <ClCompile Include="src\Widget\Traits\Widget.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
