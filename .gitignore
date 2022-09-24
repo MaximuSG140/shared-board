@@ -1,5 +1,5 @@
-*.ipch
-*.lib
-*.obj
-*.log
-*.tlog
+!*.ipch
+!*.lib
+!*.obj
+!*.log
+!*.tlog
